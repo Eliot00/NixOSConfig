@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     logseq
     tdesktop
+    yarn
   ];
   programs.git = {
     enable = true;
