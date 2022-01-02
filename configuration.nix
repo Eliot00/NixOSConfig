@@ -72,6 +72,7 @@
     isNormalUser = true;
     description = "Elliot Xu";
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    shell = pkgs.fish;
   };
 
   fonts.fonts = with pkgs; [
