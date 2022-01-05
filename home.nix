@@ -4,6 +4,7 @@
     logseq
     tdesktop
     yarn
+    dropbox
   ];
   programs.git = {
     enable = true;
