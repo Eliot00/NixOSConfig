@@ -5,6 +5,7 @@
     tdesktop
     yarn
     dropbox
+    anki
   ];
   programs.git = {
     enable = true;
