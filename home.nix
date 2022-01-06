@@ -4,7 +4,6 @@
     logseq
     tdesktop
     yarn
-    dropbox
     anki
   ];
   programs.git = {
