@@ -5,6 +5,7 @@
     tdesktop
     yarn
     anki
+    transmission-qt
   ];
   programs.git = {
     enable = true;
