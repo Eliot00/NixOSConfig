@@ -6,6 +6,7 @@
     yarn
     anki
     transmission-qt
+    jetbrains.clion
   ];
   programs.git = {
     enable = true;
