@@ -99,6 +99,7 @@
     rustup
     openssl
     pkg-config
+    commit-formatter
   ];
 
   environment.shellAliases = {
