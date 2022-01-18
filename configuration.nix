@@ -101,6 +101,7 @@
     pkg-config
     commit-formatter
     ripgrep
+    dropbox
   ];
 
   environment.shellAliases = {
