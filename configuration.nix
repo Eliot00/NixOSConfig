@@ -100,6 +100,7 @@
     openssl
     pkg-config
     commit-formatter
+    ripgrep
   ];
 
   environment.shellAliases = {
