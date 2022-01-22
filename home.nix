@@ -3,10 +3,12 @@
   home.packages = with pkgs; [
     logseq
     tdesktop
-    yarn
     anki
     transmission-qt
     jetbrains.clion
+    yarn
+    nodePackages.pnpm
+    meilisearch
   ];
   programs.git = {
     enable = true;
