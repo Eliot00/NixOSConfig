@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    logseq
+    unstable.logseq
     tdesktop
     anki
     transmission-qt
