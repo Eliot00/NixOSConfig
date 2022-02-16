@@ -3,7 +3,7 @@
   home.packages = with pkgs; [
     logseq
     tdesktop
-    anki
+    anki-bin
     transmission-qt
     jetbrains.clion
     yarn
