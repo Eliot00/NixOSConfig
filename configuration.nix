@@ -165,7 +165,6 @@
       dates = "weekly";
       options = "--delete-older-than 10d";
     };
-    package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
       flake-registry = ${./registry.json}
