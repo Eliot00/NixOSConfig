@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./vim.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -90,7 +91,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vimHugeX
     python3Full
     nodejs
     wget
