@@ -39,7 +39,7 @@ set history=800
 set hidden
 set updatetime=300
 set shortmess+=c
-set directory=$HOME/.vimswap//
+set noswapfile
 " }}}
 
 " async task {{{

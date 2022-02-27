@@ -7,7 +7,7 @@ let
       owner = "sainnhe";
       repo = "everforest";
       rev = "7c5e520962a57f7cd42bb0b9eab268795375d26e";
-      sha256 = "NYonYP54PVUwHbU+Q/D7MqhVh+IB0B17KaHtkg19PaI=";
+      sha256 = "lE8y9BA2a4y0B6O3+NyOS7numoltmzhArgwTAner2fE=";
     };
   };
   spaceduck = pkgs.vimUtils.buildVimPlugin {
