@@ -9,6 +9,7 @@
     yarn
     nodePackages.pnpm
     meilisearch
+    vlc
   ];
   programs.git = {
     enable = true;
