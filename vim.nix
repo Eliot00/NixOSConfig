@@ -1,15 +1,6 @@
 { pkgs, ... }:
 
 let 
-  everforest = pkgs.vimUtils.buildVimPlugin {
-    name = "everforest";
-    src = pkgs.fetchFromGitHub {
-      owner = "sainnhe";
-      repo = "everforest";
-      rev = "7c5e520962a57f7cd42bb0b9eab268795375d26e";
-      sha256 = "lE8y9BA2a4y0B6O3+NyOS7numoltmzhArgwTAner2fE=";
-    };
-  };
   spaceduck = pkgs.vimUtils.buildVimPlugin {
     name = "spaceduck";
     src = pkgs.fetchFromGitHub {
@@ -88,7 +79,7 @@ in {
                 fern-git-status
                 fern-renderer-nerdfont
                 nerdfont
-                vim-clap
+                # vim-clap
               ];
               opt = [
                 vim-prisma
