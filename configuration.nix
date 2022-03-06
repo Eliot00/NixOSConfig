@@ -108,7 +108,6 @@
     wget
     firefox
     gcc
-    rustup
     openssl
     pkg-config
     commit-formatter
