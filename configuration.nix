@@ -113,6 +113,9 @@
     commit-formatter
     ripgrep
     dropbox
+    layan-kde
+    libsForQt5.qtstyleplugin-kvantum
+    latte-dock
   ];
 
   environment.shellAliases = {
