@@ -1,15 +1,6 @@
 { pkgs, ... }:
 
 let 
-  spaceduck = pkgs.vimUtils.buildVimPlugin {
-    name = "spaceduck";
-    src = pkgs.fetchFromGitHub {
-      owner = "pineapplegiant";
-      repo = "spaceduck";
-      rev = "350491f19343b24fa85809242089caa02d4dadce";
-      sha256 = "lE8y9BA2a4y0B6O3+NyOS7numoltmzhArgwTAner2fE=";
-    };
-  };
   fern-git-status = pkgs.vimUtils.buildVimPlugin {
     name = "fern-git-status";
     src = pkgs.fetchFromGitHub {
@@ -72,8 +63,8 @@ in {
                 vim-surround
                 vim-fugitive
                 vim-gitgutter
-                spaceduck
                 everforest
+                sonokai
                 fern-vim
                 fern-hijack
                 fern-git-status
