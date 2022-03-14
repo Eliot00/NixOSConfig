@@ -98,6 +98,7 @@
         serif = [ "DejaVu Serif" "Noto Serif" "Source Han Serif SC" ];
       };
     };
+    fontDir.enable = true;
   };
 
   # List packages installed in system profile. To search, run:
