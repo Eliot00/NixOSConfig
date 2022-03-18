@@ -5,11 +5,10 @@
     tdesktop
     anki-bin
     transmission-qt
-    jetbrains.clion
+    vlc
+
     yarn
     nodePackages.pnpm
-    meilisearch
-    vlc
   ];
   programs.git = {
     enable = true;
@@ -24,4 +23,5 @@
       lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --";
     };
   };
+  programs.obs-studio.enable = true;
 }

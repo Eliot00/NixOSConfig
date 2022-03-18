@@ -145,6 +145,7 @@
     enableSSHSupport = true;
   };
   programs.fish.enable = true;
+  programs.kdeconnect.enable = true;
 
   # List services that you want to enable:
 
