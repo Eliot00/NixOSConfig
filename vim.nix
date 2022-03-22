@@ -70,7 +70,7 @@ in {
                 fern-git-status
                 fern-renderer-nerdfont
                 nerdfont
-                # vim-clap
+                LeaderF
               ];
               opt = [
                 vim-prisma
