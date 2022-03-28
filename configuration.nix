@@ -83,19 +83,19 @@
   fonts = {
     fonts = with pkgs; [
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
       noto-fonts-emoji
-      liberation_ttf
-      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
       lxgw-wenkai
-      hack-font
-      source-han-sans
+      jetbrains-mono
+      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
     fontconfig = {
       defaultFonts = {
-        monospace = [ "Hack" "FiraCode Nerd Font Mono" "LXGW WenKai" ];
-        sansSerif = [ "DejaVu Sans" "Noto Sans" "Source Han Sans SC" ];
-        serif = [ "DejaVu Serif" "Noto Serif" "Source Han Serif SC" ];
+        monospace = [ "JetBrains Mono" "LXGW WenKai" ];
+        sansSerif = [ "DejaVu Sans" "Noto Sans CJK SC" "Noto Sans CJK TC" "LXGW WenKai" ];
+        serif = [ "DejaVu Serif" "Noto Serif CJK SC" "Noto Serif CJK TC" "LXGW WenKai" ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
     fontDir.enable = true;
