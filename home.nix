@@ -6,6 +6,7 @@
     anki-bin
     transmission-qt
     vlc
+    libsForQt5.kate
 
     yarn
     nodePackages.pnpm
