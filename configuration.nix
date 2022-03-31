@@ -87,14 +87,16 @@
       noto-fonts-cjk-serif
       noto-fonts-emoji
       lxgw-wenkai
+      hanazono
+
       jetbrains-mono
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
     fontconfig = {
       defaultFonts = {
-        monospace = [ "JetBrains Mono" "LXGW WenKai" ];
-        sansSerif = [ "DejaVu Sans" "Noto Sans CJK SC" "Noto Sans CJK TC" "LXGW WenKai" ];
-        serif = [ "DejaVu Serif" "Noto Serif CJK SC" "Noto Serif CJK TC" "LXGW WenKai" ];
+        monospace = [ "JetBrains Mono" "LXGW WenKai" "HanaMinA" "HanaMinB" ];
+        sansSerif = [ "DejaVu Sans" "Noto Sans CJK SC" "Noto Sans CJK TC" "HanaMinA" "HanaMinB" ];
+        serif = [ "DejaVu Serif" "Noto Serif CJK SC" "Noto Serif CJK TC" "HanaMinA" "HanaMinB" ];
         emoji = [ "Noto Color Emoji" ];
       };
     };
