@@ -42,7 +42,6 @@ in {
       environment.systemPackages = [
         (pkgs.vim_configurable.customize {
           name = "vim";
-          wrapGui = true;
           vimrcConfig = {
             customRC = (builtins.readFile ./init.vim);
             packages.myVimPackage = with pkgs.vimPlugins; {
