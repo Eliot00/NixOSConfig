@@ -150,6 +150,9 @@
   programs.kdeconnect.enable = true;
   programs.fish = {
     enable = true;
+    promptInit = ''
+      set --universal pure_enable_single_line_prompt true
+    '';
     vendor.functions.enable = true;
     vendor.config.enable = true;
   };
