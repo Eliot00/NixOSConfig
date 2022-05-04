@@ -23,6 +23,13 @@
       co = "checkout";
       lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --";
     };
+    extraConfig = {
+      safe = {
+        directory = [
+          "/etc/nixos"
+        ];
+      };
+    };
   };
   programs.obs-studio.enable = true;
 }
