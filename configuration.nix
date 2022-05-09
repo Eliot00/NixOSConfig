@@ -111,6 +111,7 @@
     wget
     firefox
     gcc
+    ghc
     openssl
     pkg-config
     commit-formatter
