@@ -9,6 +9,8 @@
     vlc
     libsForQt5.kate
 
+    wezterm
+
     yarn
     nodePackages.pnpm
   ];
