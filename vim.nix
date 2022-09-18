@@ -64,6 +64,7 @@ in {
                 vim-gitgutter
                 everforest
                 sonokai
+                nightfox-nvim
                 fern-vim
                 fern-hijack
                 fern-git-status
