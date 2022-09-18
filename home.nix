@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  home.stateVersion = "21.11";
   home.packages = with pkgs; [
     logseq
     tdesktop
@@ -17,7 +18,7 @@
     userEmail = "hack00mind@gmail.com";
     signing = {
       signByDefault = true;
-      key = "Elliot (My Github GPG) <hack00mind@gmail.com>";
+      key = "D66320252AADEFFC";
     };
     aliases = {
       co = "checkout";
