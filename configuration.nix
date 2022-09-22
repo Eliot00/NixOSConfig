@@ -110,7 +110,7 @@
     python3Full
     nodejs
     wget
-    firefox
+    firefox-wayland
     gcc
     ghc
     openssl
