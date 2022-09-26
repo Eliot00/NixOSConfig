@@ -123,7 +123,6 @@
     layan-kde
     whitesur-gtk-theme
     libsForQt5.qtstyleplugin-kvantum
-    latte-dock
     fishPlugins.pure
   ];
 
