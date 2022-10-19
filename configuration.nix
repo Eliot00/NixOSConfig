@@ -123,7 +123,9 @@
     layan-kde
     whitesur-gtk-theme
     libsForQt5.qtstyleplugin-kvantum
+    libsForQt5.ktorrent
     fishPlugins.pure
+    latte-dock
   ];
 
   environment.shellAliases = {

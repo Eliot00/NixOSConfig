@@ -5,7 +5,6 @@
     logseq
     tdesktop
     anki-bin
-    transmission-qt
     vlc
     libsForQt5.kate
     android-studio
@@ -36,4 +35,5 @@
     };
   };
   programs.obs-studio.enable = true;
+  manual.manpages.enable = false;
 }
