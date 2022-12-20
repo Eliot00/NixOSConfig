@@ -37,6 +37,15 @@ let
       sha256 = "NYonYP54PVUwHbU+Q/D7MqhVh+IB0B17KaHtkg19PaI=";
     };
   };
+  auto-pairs = pkgs.vimUtils.buildVimPlugin {
+    name = "auto-pairs";
+    src = pkgs.fetchFromGitHub {
+      owner = "Eliot00";
+      repo = "auto-pairs";
+      rev = "90b7d76c93dd9996bc6f677b11b6379340ba5dfb";
+      sha256 = "4wwYNLAOSsHavcXhKP7c766cakEiLGiThm450NjFCYI=";
+    };
+  };
 in {
       environment.variables = { EDITOR = "vim"; };
       environment.systemPackages = [
@@ -46,6 +55,7 @@ in {
             customRC = (builtins.readFile ./init.vim);
             packages.myVimPackage = with pkgs.vimPlugins; {
               start = [
+                auto-pairs
                 coc-nvim
                 coc-tsserver
                 coc-tabnine
