@@ -112,6 +112,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     python3Full
+    pdm
     nodejs
     wget
     firefox
