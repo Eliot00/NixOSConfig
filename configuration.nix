@@ -202,6 +202,8 @@
     extraOptions = ''
       experimental-features = nix-command flakes
       flake-registry = ${./registry.json}
+      keep-outputs = true
+      keep-derivations = true
     '';
   };
 }
