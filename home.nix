@@ -4,7 +4,10 @@
   home.packages = with pkgs; [
     logseq
     tdesktop
+
     anki-bin
+    mpv # anki dependent on it
+
     vlc
     libsForQt5.kate
     android-studio
