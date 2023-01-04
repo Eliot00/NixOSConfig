@@ -13,6 +13,8 @@
 
     yarn
     nodePackages.pnpm
+
+    jetbrains.datagrip
   ];
   programs.git = {
     enable = true;
