@@ -78,11 +78,11 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.defaultUserShell = pkgs.fish;
   users.users.elliot = {
     isNormalUser = true;
     description = "Elliot Xu";
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    shell = pkgs.fish;
   };
 
   fonts = {
