@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-let 
+let
   fern-git-status = pkgs.vimUtils.buildVimPlugin {
     name = "fern-git-status";
     src = pkgs.fetchFromGitHub {
@@ -46,48 +46,49 @@ let
       sha256 = "4wwYNLAOSsHavcXhKP7c766cakEiLGiThm450NjFCYI=";
     };
   };
-in {
-      environment.variables = { EDITOR = "vim"; };
-      environment.systemPackages = [
-        (pkgs.vim_configurable.customize {
-          name = "vim";
-          vimrcConfig = {
-            customRC = (builtins.readFile ./init.vim);
-            packages.myVimPackage = with pkgs.vimPlugins; {
-              start = [
-                auto-pairs
-                coc-nvim
-                coc-tsserver
-                coc-tabnine
-                coc-rust-analyzer
-                coc-pyright
-                coc-json
-                coc-html
-                coc-css
-                vim-polyglot
-                asyncrun-vim
-                asynctasks-vim
-                vim-airline
-                vim-airline-themes
-                vim-surround
-                vim-fugitive
-                vim-gitgutter
-                everforest
-                sonokai
-                nightfox-nvim
-                fern-vim
-                fern-hijack
-                fern-git-status
-                fern-renderer-nerdfont
-                nerdfont
-                LeaderF
-              ];
-              opt = [
-                vim-prisma
-                vista-vim
-              ];
-            };
-          };
-        })
-    ];
+in
+{
+  environment.variables = { EDITOR = "vim"; };
+  environment.systemPackages = [
+    (pkgs.vim_configurable.customize {
+      name = "vim";
+      vimrcConfig = {
+        customRC = (builtins.readFile ./init.vim);
+        packages.myVimPackage = with pkgs.vimPlugins; {
+          start = [
+            auto-pairs
+            coc-nvim
+            coc-tsserver
+            coc-tabnine
+            coc-rust-analyzer
+            coc-pyright
+            coc-json
+            coc-html
+            coc-css
+            vim-polyglot
+            asyncrun-vim
+            asynctasks-vim
+            vim-airline
+            vim-airline-themes
+            vim-surround
+            vim-fugitive
+            vim-gitgutter
+            everforest
+            sonokai
+            nightfox-nvim
+            fern-vim
+            fern-hijack
+            fern-git-status
+            fern-renderer-nerdfont
+            nerdfont
+            LeaderF
+          ];
+          opt = [
+            vim-prisma
+            vista-vim
+          ];
+        };
+      };
+    })
+  ];
 }

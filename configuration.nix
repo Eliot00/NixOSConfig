@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./vim.nix
     ];
@@ -17,7 +18,7 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  swapDevices = [ { label = "swap"; } ];
+  swapDevices = [{ label = "swap"; }];
 
   networking.hostName = "elliot-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -59,7 +60,7 @@
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.desktopManager.plasma5.useQtScaling = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
-  
+
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
