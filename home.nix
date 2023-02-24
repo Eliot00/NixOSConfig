@@ -1,4 +1,4 @@
-{ pkgs, stable, ... }:
+{ pkgs, ... }:
 {
   home.stateVersion = "21.11";
   home.packages = with pkgs; [
@@ -12,7 +12,7 @@
     libsForQt5.kate
     android-studio
 
-    stable.legacyPackages.x86_64-linux.wezterm
+    wezterm
 
     yarn
     nodePackages.pnpm
