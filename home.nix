@@ -43,4 +43,12 @@
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacs;
+    extraConfig = ''
+      (setq standard-indent 2)
+    '';
+  };
 }
