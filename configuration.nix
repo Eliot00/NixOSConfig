@@ -9,7 +9,6 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./vim.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
