@@ -58,6 +58,7 @@
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.desktopManager.plasma5.useQtScaling = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
+  programs.hyprland.enable = true;
 
 
   # Configure keymap in X11
