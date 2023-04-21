@@ -54,11 +54,25 @@
 
 
   # Enable the Plasma 5 Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-  services.xserver.desktopManager.plasma5.useQtScaling = true;
+  # services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
+  # services.xserver.desktopManager.plasma5.useQtScaling = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
   programs.hyprland.enable = true;
+  services.greetd = {
+    enable = true;
+    settings = rec {
+      initial_session = {
+        command = "Hyprland";
+        user = "elliot";
+      };
+      default_session = initial_session;
+    };
+  };
+  environment.etc."greetd/environments".text = ''
+    Hyprland
+    fish
+  '';
 
 
   # Configure keymap in X11
