@@ -160,6 +160,7 @@
     gsta = "git stash";
     gstp = "git stash pop";
     gstd = "git stash drop";
+    cf = "git cf";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
