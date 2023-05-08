@@ -7,7 +7,6 @@
     "wlr/workspaces"
     "temperature"
     "hyprland/window"
-    "custom/music"
   ];
   "modules-right" = [
     "tray"
@@ -35,6 +34,9 @@
       "9" = "<span color=\"#26A5E4\"></span>";
       "focused" = "";
       "default" = "";
+      "on-scroll-up" = "hyprctl dispatch workspace e+1";
+      "on-scroll-down" = "hyprctl dispatch workspace e-1";
+      "on-click" = "activate";
     };
   };
   "idle_inhibitor" = {
@@ -83,20 +85,6 @@
   "cpu" = {
     "interval" = 1;
     "format" = " {usage}%";
-  };
-  "custom/music" = {
-    "format" = "{}";
-    "interval" = 1;
-    "exec-if" = "${lib.getExe pkgs.playerctl} metadata";
-    "exec" = pkgs.writeShellScript "music" ''
-      #!/usr/bin/env bash
-      if [[ $(${lib.getExe pkgs.playerctl} metadata artist) ]]
-      then
-        echo $(${lib.getExe pkgs.playerctl} metadata artist) - $(${lib.getExe pkgs.playerctl} metadata title)
-      else
-        echo $(${lib.getExe pkgs.playerctl} metadata title)
-      fi
-    '';
   };
   "network" = {
     "interval" = 1;
