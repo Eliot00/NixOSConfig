@@ -137,10 +137,11 @@
     commit-formatter
     ripgrep
     dropbox
-    layan-kde
-    whitesur-gtk-theme
+
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.ktorrent
+    libsForQt5.dolphin
+
     fishPlugins.pure
     wofi
   ];
