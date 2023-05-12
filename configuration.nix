@@ -140,7 +140,6 @@
     libsForQt5.ktorrent
 
     fishPlugins.pure
-    wofi
   ];
 
   environment.shellAliases = {
