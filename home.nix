@@ -2,7 +2,6 @@
 {
   imports = [
     elliot-vim.homeManagerModules.vim-config
-    ./programs
   ];
 
   home.stateVersion = "21.11";

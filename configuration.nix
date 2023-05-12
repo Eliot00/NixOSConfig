@@ -54,24 +54,22 @@
 
 
   # Enable the Plasma 5 Desktop Environment.
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
-  # services.xserver.desktopManager.plasma5.useQtScaling = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.desktopManager.plasma5.useQtScaling = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
   programs.hyprland.enable = true;
   services.greetd = {
     enable = true;
     settings = rec {
       initial_session = {
-        command = "Hyprland";
+        command = "${pkgs.greetd.greetd}/bin/agreety --cmd startplasma-wayland";
         user = "elliot";
       };
       default_session = initial_session;
     };
   };
   environment.etc."greetd/environments".text = ''
-    Hyprland
-    fish
+    startplasma-wayland
   '';
 
 
@@ -140,7 +138,6 @@
 
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.ktorrent
-    libsForQt5.dolphin
 
     fishPlugins.pure
     wofi
