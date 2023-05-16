@@ -45,6 +45,7 @@
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+  programs.fish.enable = true;
 
   programs.emacs = {
     enable = true;
