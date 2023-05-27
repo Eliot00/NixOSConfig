@@ -62,7 +62,7 @@
     enable = true;
     settings = rec {
       initial_session = {
-        command = "${pkgs.greetd.greetd}/bin/agreety --cmd startplasma-wayland";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
         user = "elliot";
       };
       default_session = initial_session;
