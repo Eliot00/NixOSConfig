@@ -177,6 +177,11 @@
     vendor.functions.enable = true;
     vendor.config.enable = true;
   };
+  programs.ssh.extraConfig = ''
+    Host github.com
+    Hostname ssh.github.com
+    Port 443
+  '';
 
   # List services that you want to enable:
 
