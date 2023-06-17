@@ -107,7 +107,8 @@
       hanazono
 
       jetbrains-mono
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      cascadia-code
+      (nerdfonts.override { fonts = [ "JetBrainsMono" "CascadiaCode" ]; })
     ];
     fontconfig = {
       defaultFonts = {
