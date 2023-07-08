@@ -9,13 +9,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rust-overlay.url = "github:oxalica/rust-overlay";
-    elliot-vim = {
-      url = "github:Eliot00/ElliotVim/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, stable, home-manager, rust-overlay, elliot-vim, ... }@inputs: {
+  outputs = { self, nixpkgs, stable, home-manager, rust-overlay, ... }@inputs: {
     nixosConfigurations.elliot-nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -37,14 +33,8 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             users.elliot = import ./home.nix;
-
-            extraSpecialArgs = {
-              inherit stable elliot-vim;
-            };
           };
         }
-
-        elliot-vim.nixosModules.default
       ];
     };
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;

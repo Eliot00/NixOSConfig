@@ -125,7 +125,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     python3Full
-    # pdm
+    pdm
     nodejs
     wget
     firefox
@@ -136,6 +136,7 @@
     commit-formatter
     ripgrep
     dropbox
+    vim-full
 
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.ktorrent

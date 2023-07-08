@@ -1,8 +1,5 @@
-{ pkgs, elliot-vim, ... }:
+{ pkgs, ... }:
 {
-  imports = [
-    elliot-vim.homeManagerModules.vim-config
-  ];
 
   home.stateVersion = "21.11";
   home.packages = with pkgs; [
