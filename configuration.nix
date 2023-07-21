@@ -72,7 +72,6 @@
     startplasma-wayland
   '';
 
-
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
@@ -136,7 +135,6 @@
     commit-formatter
     ripgrep
     dropbox
-    vim-full
 
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.ktorrent
@@ -184,6 +182,10 @@
     Hostname ssh.github.com
     Port 443
   '';
+  programs.vim = {
+    defaultEditor = true;
+    package = pkgs.vim-full;
+  };
 
   # List services that you want to enable:
 
