@@ -32,7 +32,7 @@
   networking.interfaces.enp7s0.useDHCP = true;
   networking.interfaces.wlp6s0.useDHCP = true;
   networking.networkmanager.enable = true;
-  services.v2raya.enable = true;
+  services.dae.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
