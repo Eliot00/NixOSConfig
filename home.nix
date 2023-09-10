@@ -11,7 +11,6 @@
 
     vlc
     libsForQt5.kate
-    android-studio
 
     wezterm
 
