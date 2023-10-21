@@ -32,6 +32,11 @@
   networking.interfaces.enp7s0.useDHCP = true;
   networking.interfaces.wlp6s0.useDHCP = true;
   networking.networkmanager.enable = true;
+  networking.nameservers = [
+    "119.29.29.29"
+    "223.5.5.5"
+    "1.1.1.1"
+  ];
   services.dae = {
     enable = true;
     configFile = "/home/elliot/.config/dae/config.dae";
