@@ -16,8 +16,6 @@
         rust-analyzer
 
         vim-darwin
-
-        wezterm
     ];
     environment.shells = [ pkgs.bashInteractive pkgs.fish ];
 
