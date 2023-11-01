@@ -3,7 +3,6 @@
 
   home.stateVersion = "21.11";
   home.packages = with pkgs; [
-    logseq
     tdesktop
 
     anki-bin
