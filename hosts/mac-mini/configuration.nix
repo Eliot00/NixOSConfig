@@ -16,6 +16,11 @@
         rust-analyzer
 
         vim-darwin
+
+        # ios/android development
+        ruby
+        cocoapods
+        jdk
     ];
     environment.shells = [ pkgs.bashInteractive pkgs.fish ];
 
