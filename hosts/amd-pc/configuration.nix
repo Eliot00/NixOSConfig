@@ -141,6 +141,7 @@
     openssl
     pkg-config
     commit-formatter
+    racket
     ripgrep
 
     libsForQt5.qtstyleplugin-kvantum
