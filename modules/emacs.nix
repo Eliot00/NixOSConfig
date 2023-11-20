@@ -10,18 +10,19 @@
 
       # programming
       cape
-      yasnippet
-      corfu
       consult
+      consult
+      corfu
+      eglot
       flycheck
+      haskell-mode
       magit
       marginalia
       orderless
-      vertico
-      consult
-      eglot
+      pinyinlib
       rust-mode
-      haskell-mode
+      vertico
+      yasnippet
 
       doom-modeline
       ef-themes
