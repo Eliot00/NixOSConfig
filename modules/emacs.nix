@@ -9,8 +9,9 @@
       evil
 
       # programming
-      company
-      company-box
+      cape
+      yasnippet
+      corfu
       consult
       flycheck
       magit
@@ -29,8 +30,6 @@
       org-modern
       org-roam
       org-roam-ui
-
-      ement
     ];
   };
 }
