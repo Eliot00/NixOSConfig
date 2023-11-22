@@ -58,12 +58,9 @@
     (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
 
     commit-formatter
-    dhall
     htop
-    ots
     ripgrep
     tree
-    watchman
   ];
 
   programs.fish.enable = true;
