@@ -11,7 +11,6 @@
       # programming
       cape
       consult
-      consult
       corfu
       eglot
       flycheck
@@ -27,6 +26,7 @@
       doom-modeline
       ef-themes
 
+      org
       org-appear
       org-modern
       org-roam
