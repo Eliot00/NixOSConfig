@@ -169,6 +169,9 @@
     cf = "git cf";
   };
 
+  environment.variables.GTK_IM_MODULE = lib.mkForce "";
+  environment.variables.QT_IM_MODULE = lib.mkForce "";
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
