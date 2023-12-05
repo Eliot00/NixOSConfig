@@ -122,5 +122,6 @@
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     EDITOR = "vim";
+    PDM_VENV_BACKEND = "venv";
   };
 }
