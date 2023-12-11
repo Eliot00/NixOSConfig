@@ -2,17 +2,14 @@
 {
   programs.emacs = {
     enable = true;
-    package = if pkgs.system == "aarch64-darwin" then pkgs.emacsMacport else pkgs.emacs;
+    package = if pkgs.system == "aarch64-darwin" then pkgs.emacs29-macport else pkgs.emacs29;
     extraPackages = epkgs : with epkgs; [
-      use-package
-
       evil
 
       # programming
       cape
       consult
       corfu
-      eglot
       flycheck
       haskell-mode
       magit
@@ -26,7 +23,6 @@
       doom-modeline
       ef-themes
 
-      org
       org-appear
       org-modern
       org-roam
