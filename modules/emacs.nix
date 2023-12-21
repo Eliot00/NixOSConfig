@@ -11,12 +11,10 @@
       consult
       corfu
       flycheck
-      haskell-mode
       magit
       marginalia
       orderless
       pinyinlib
-      rust-mode
       vertico
       yasnippet
 
