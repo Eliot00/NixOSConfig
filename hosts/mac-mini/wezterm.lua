@@ -88,4 +88,5 @@ return {
       format = 'https://example.com/tasks/?t=$1',
     },
   },
+  default_prog = { '/run/current-system/sw/bin/fish', '-l' }
 }

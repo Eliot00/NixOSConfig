@@ -22,8 +22,6 @@
         cocoapods
         jdk
     ];
-    environment.shells = [ pkgs.bashInteractive pkgs.fish ];
-
 
     users.users.elliot = {
         home = "/Users/elliot";
