@@ -18,6 +18,9 @@
 
     yarn
     nodePackages.pnpm
+
+    # test unstable wayland ime protocols
+    weston
   ];
   programs.git = {
     enable = true;
