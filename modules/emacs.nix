@@ -2,7 +2,7 @@
 {
   programs.emacs = {
     enable = true;
-    package = if pkgs.system == "aarch64-darwin" then pkgs.emacs29-macport else pkgs.emacs29;
+    package = if pkgs.system == "aarch64-darwin" then pkgs.emacs29-macport else pkgs.emacs29-pgtk;
     extraPackages = epkgs : with epkgs; [
       evil
 
