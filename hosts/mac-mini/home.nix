@@ -61,6 +61,7 @@
     htop
     ripgrep
     tree
+    swift-format
   ];
 
   programs.fish.enable = true;
