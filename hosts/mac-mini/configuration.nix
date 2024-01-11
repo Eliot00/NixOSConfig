@@ -25,7 +25,6 @@
 
     users.users.elliot = {
         home = "/Users/elliot";
-        shell = pkgs.fish;
     };
 
     # Auto upgrade nix package and the daemon service.
@@ -66,6 +65,8 @@
             end
         '';
     };
+
+    programs.zsh.enable = true;
 
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
