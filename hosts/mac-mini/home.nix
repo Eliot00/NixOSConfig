@@ -106,11 +106,6 @@
     '';
   };
 
-  programs.wezterm = {
-    enable = true;
-    extraConfig = builtins.readFile ./wezterm.lua;
-  };
-
   # You can also manage environment variables but you will have to manually
   # source
   #
