@@ -145,9 +145,6 @@
     ripgrep
     stack
 
-    libsForQt5.qtstyleplugin-kvantum
-    libsForQt5.ktorrent
-
     fishPlugins.pure
   ];
 
