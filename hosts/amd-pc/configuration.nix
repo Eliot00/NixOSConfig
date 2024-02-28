@@ -131,7 +131,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     android-studio
-    python3Full
+    python3
     pdm
     nodejs
     wget
