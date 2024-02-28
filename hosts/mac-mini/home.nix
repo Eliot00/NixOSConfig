@@ -73,35 +73,60 @@
     enable = true;
     keyConfig = ''
       (
-      open_help: Some(( code: F(1), modifiers: ( bits: 0,),)),
+        open_help: Some(( code: F(1), modifiers: "")),
 
-      move_left: Some(( code: Char('h'), modifiers: ( bits: 0,),)),
-      move_right: Some(( code: Char('l'), modifiers: ( bits: 0,),)),
-      move_up: Some(( code: Char('k'), modifiers: ( bits: 0,),)),
-      move_down: Some(( code: Char('j'), modifiers: ( bits: 0,),)),
+        move_left: Some(( code: Char('h'), modifiers: "")),
+        move_right: Some(( code: Char('l'), modifiers: "")),
+        move_up: Some(( code: Char('k'), modifiers: "")),
+        move_down: Some(( code: Char('j'), modifiers: "")),
 
-      popup_up: Some(( code: Char('p'), modifiers: ( bits: 2,),)),
-      popup_down: Some(( code: Char('n'), modifiers: ( bits: 2,),)),
-      page_up: Some(( code: Char('b'), modifiers: ( bits: 2,),)),
-      page_down: Some(( code: Char('f'), modifiers: ( bits: 2,),)),
-      home: Some(( code: Char('g'), modifiers: ( bits: 0,),)),
-      end: Some(( code: Char('G'), modifiers: ( bits: 1,),)),
-      shift_up: Some(( code: Char('K'), modifiers: ( bits: 1,),)),
-      shift_down: Some(( code: Char('J'), modifiers: ( bits: 1,),)),
+        popup_up: Some(( code: Char('p'), modifiers: "CONTROL")),
+        popup_down: Some(( code: Char('n'), modifiers: "CONTROL")),
+        page_up: Some(( code: Char('b'), modifiers: "CONTROL")),
+        page_down: Some(( code: Char('f'), modifiers: "CONTROL")),
+        home: Some(( code: Char('g'), modifiers: "")),
+        end: Some(( code: Char('G'), modifiers: "SHIFT")),
+        shift_up: Some(( code: Char('K'), modifiers: "SHIFT")),
+        shift_down: Some(( code: Char('J'), modifiers: "SHIFT")),
 
-      edit_file: Some(( code: Char('I'), modifiers: ( bits: 1,),)),
+        edit_file: Some(( code: Char('I'), modifiers: "SHIFT")),
 
-      status_reset_item: Some(( code: Char('U'), modifiers: ( bits: 1,),)),
+        status_reset_item: Some(( code: Char('U'), modifiers: "SHIFT")),
 
-      diff_reset_lines: Some(( code: Char('u'), modifiers: ( bits: 0,),)),
-      diff_stage_lines: Some(( code: Char('s'), modifiers: ( bits: 0,),)),
+        diff_reset_lines: Some(( code: Char('u'), modifiers: "")),
+        diff_stage_lines: Some(( code: Char('s'), modifiers: "")),
 
-      stashing_save: Some(( code: Char('w'), modifiers: ( bits: 0,),)),
-      stashing_toggle_index: Some(( code: Char('m'), modifiers: ( bits: 0,),)),
+        stashing_save: Some(( code: Char('w'), modifiers: "")),
+        stashing_toggle_index: Some(( code: Char('m'), modifiers: "")),
 
-      stash_open: Some(( code: Char('l'), modifiers: ( bits: 0,),)),
+        stash_open: Some(( code: Char('l'), modifiers: "")),
 
-      abort_merge: Some(( code: Char('M'), modifiers: ( bits: 1,),)),
+        abort_merge: Some(( code: Char('M'), modifiers: "SHIFT")),
+      )
+    '';
+    theme = ''
+      (
+        selected_tab: Some(Reset),
+        command_fg: Some(Rgb(76, 79, 105)),
+        selection_bg: Some(Rgb(172, 176, 190)),
+        selection_fg: Some(Rgb(76, 79, 105)),
+        cmdbar_bg: Some(Rgb(230, 233, 239)),
+        cmdbar_extra_lines_bg: Some(Rgb(230, 233, 239)),
+        disabled_fg: Some(Rgb(140, 143, 161)),
+        diff_line_add: Some(Rgb(64, 160, 43)),
+        diff_line_delete: Some(Rgb(210, 15, 57)),
+        diff_file_added: Some(Rgb(223, 142, 29)),
+        diff_file_removed: Some(Rgb(230, 69, 83)),
+        diff_file_moved: Some(Rgb(136, 57, 239)),
+        diff_file_modified: Some(Rgb(254, 100, 11)),
+        commit_hash: Some(Rgb(114, 135, 253)),
+        commit_time: Some(Rgb(92, 95, 119)),
+        commit_author: Some(Rgb(32, 159, 181)),
+        danger_fg: Some(Rgb(210, 15, 57)),
+        push_gauge_bg: Some(Rgb(30, 102, 245)),
+        push_gauge_fg: Some(Rgb(239, 241, 245)),
+        tag_fg: Some(Rgb(220, 138, 120)),
+        branch_fg: Some(Rgb(23, 146, 153))
       )
     '';
   };
