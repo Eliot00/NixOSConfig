@@ -54,7 +54,10 @@
   i18n.defaultLocale = "zh_CN.UTF-8";
   i18n.inputMethod = {
     enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [ fcitx5-rime fcitx5-chinese-addons fcitx5-anthy ];
+    fcitx5 = {
+      addons = with pkgs; [ fcitx5-rime fcitx5-chinese-addons fcitx5-anthy ];
+      waylandFrontend = true;
+    };
   };
 
   # Enable the X11 windowing system.
@@ -166,9 +169,6 @@
     gstd = "git stash drop";
     cf = "git cf";
   };
-
-  environment.variables.GTK_IM_MODULE = lib.mkForce "";
-  environment.variables.QT_IM_MODULE = lib.mkForce "";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
