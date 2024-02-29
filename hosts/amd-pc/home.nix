@@ -12,7 +12,7 @@
     mpv # anki dependent on it
 
     vlc
-    libsForQt5.kate
+    kdePackages.kate
 
     wezterm
 
