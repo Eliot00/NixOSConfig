@@ -61,23 +61,23 @@
   services.xserver.enable = true;
 
 
-  # Enable the Plasma 5 Desktop Environment.
-  services.xserver.desktopManager.plasma5.enable = true;
-  services.xserver.desktopManager.plasma5.useQtScaling = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma6.enable = true;
+  services.xserver.desktopManager.plasma6.enableQt5Integration = false;
   services.xserver.videoDrivers = [ "amdgpu" ];
-  services.greetd = {
-    enable = true;
-    settings = rec {
-      initial_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
-        user = "elliot";
-      };
-      default_session = initial_session;
-    };
-  };
-  environment.etc."greetd/environments".text = ''
-    startplasma-wayland
-  '';
+  # services.greetd = {
+  #   enable = true;
+  #   settings = rec {
+  #     initial_session = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+  #       user = "elliot";
+  #     };
+  #     default_session = initial_session;
+  #   };
+  # };
+  # environment.etc."greetd/environments".text = ''
+  #   startplasma-wayland
+  # '';
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
