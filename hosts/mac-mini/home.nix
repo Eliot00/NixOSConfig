@@ -55,7 +55,7 @@
     # '')
     cascadia-code
     lxgw-wenkai
-    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+    (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
 
     commit-formatter
     htop
