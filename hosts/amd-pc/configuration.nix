@@ -121,6 +121,7 @@
     gcc
     ghc
     openssl
+    ossutil
     pkg-config
     commit-formatter
     racket
