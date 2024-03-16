@@ -64,29 +64,9 @@
 
 
   services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma6.enable = true;
-  services.xserver.desktopManager.plasma6.enableQt5Integration = false;
   services.xserver.videoDrivers = [ "amdgpu" ];
-  # services.greetd = {
-  #   enable = true;
-  #   settings = rec {
-  #     initial_session = {
-  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
-  #       user = "elliot";
-  #     };
-  #     default_session = initial_session;
-  #   };
-  # };
-  # environment.etc."greetd/environments".text = ''
-  #   startplasma-wayland
-  # '';
-
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enableQt5Integration = false;
 
   # Enable sound.
   sound.enable = true;
