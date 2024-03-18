@@ -61,7 +61,7 @@
     htop
     ripgrep
     tree
-    swift-format
+    pandoc
   ];
 
   programs.fish.enable = true;
