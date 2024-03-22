@@ -113,20 +113,21 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     android-studio
-    python3
-    pdm
-    nodejs
-    wget
+    commit-formatter
     firefox
     gcc
     ghc
+    nodejs
     openssl
     ossutil
+    pandoc
+    pdm
     pkg-config
-    commit-formatter
+    python3
     racket
     ripgrep
     stack
+    wget
 
     fishPlugins.pure
   ];
