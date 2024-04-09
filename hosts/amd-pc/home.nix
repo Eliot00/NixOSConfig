@@ -7,6 +7,7 @@
   home.stateVersion = "21.11";
   home.packages = with pkgs; [
     tdesktop
+    nheko
 
     anki-bin
     mpv # anki dependent on it
