@@ -87,9 +87,7 @@
 
   fonts = {
     packages = with pkgs; [
-      noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
       noto-fonts-emoji
       lxgw-wenkai
       hanazono
@@ -100,9 +98,9 @@
     ];
     fontconfig = {
       defaultFonts = {
-        monospace = [ "JetBrains Mono" "LXGW WenKai" "HanaMinA" "HanaMinB" ];
-        sansSerif = [ "DejaVu Sans" "Noto Sans CJK SC" "Noto Sans CJK TC" "HanaMinA" "HanaMinB" ];
-        serif = [ "DejaVu Serif" "Noto Serif CJK SC" "Noto Serif CJK TC" "HanaMinA" "HanaMinB" ];
+        monospace = [ "JetBrains Mono" "Noto Sans CJK SC" "Noto Sans CJK TC" ];
+        sansSerif = [ "DejaVu Sans" "LXGW WenKai" "HanaMinA" "HanaMinB" ];
+        serif = [ "DejaVu Serif" "LXGW WenKai" "HanaMinA" "HanaMinB" ];
         emoji = [ "Noto Color Emoji" ];
       };
     };
