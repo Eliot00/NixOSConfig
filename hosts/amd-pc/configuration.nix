@@ -63,8 +63,8 @@
   services.xserver.enable = true;
 
 
-  services.xserver.displayManager.sddm.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
+  services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
   services.desktopManager.plasma6.enableQt5Integration = false;
 
