@@ -15,8 +15,6 @@
     vlc
     kdePackages.kate
 
-    wezterm
-
     yarn
     nodePackages.pnpm
 
