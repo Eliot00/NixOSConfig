@@ -13,6 +13,8 @@
         nodePackages.pm2
         yarn
 
+        racket-minimal
+
         rust-analyzer
 
         vim-darwin
