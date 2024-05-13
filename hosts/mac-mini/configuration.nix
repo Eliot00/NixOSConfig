@@ -13,7 +13,7 @@
         nodePackages.pm2
         yarn
 
-        racket-minimal
+        racket
 
         rust-analyzer
 
