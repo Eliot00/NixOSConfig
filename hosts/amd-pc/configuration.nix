@@ -174,6 +174,7 @@
     defaultEditor = true;
     package = pkgs.vim-full;
   };
+  programs.adb.enable = true;
 
   # List services that you want to enable:
 
