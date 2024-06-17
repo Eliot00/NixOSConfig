@@ -51,7 +51,7 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "Cascadia Code";
+      name = "Cascadia Code NF";
       size = 18;
     };
     shellIntegration = {

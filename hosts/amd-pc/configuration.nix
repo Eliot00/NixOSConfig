@@ -94,7 +94,7 @@
 
       jetbrains-mono
       cascadia-code
-      (nerdfonts.override { fonts = [ "JetBrainsMono" "CascadiaCode" ]; })
+      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
     fontconfig = {
       defaultFonts = {
