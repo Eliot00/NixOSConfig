@@ -36,7 +36,7 @@
     # Necessary for using flakes on this system.
     nix.settings = {
         experimental-features = "nix-command flakes";
-        sandbox = true;
+        sandbox = false;
     };
 
     programs.fish = {
