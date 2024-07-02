@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ../../modules/emacs.nix
+    ../../modules/emacs
   ];
 
   home.stateVersion = "21.11";

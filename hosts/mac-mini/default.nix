@@ -1,4 +1,4 @@
-{ self, nix-darwin, nixpkgs, home-manager, rust-overlay, ... }:
+{ self, nix-darwin, nixpkgs, home-manager, rust-overlay, emacs-overlay, ... }:
 let
   revision = { pkgs, ... }: {
     # Set Git commit hash for darwin-version.
@@ -11,7 +11,10 @@ in nix-darwin.lib.darwinSystem {
 
     # Rust config
     ({ pkgs, ... }: {
-      nixpkgs.overlays = [ rust-overlay.overlays.default ];
+      nixpkgs.overlays = [
+        rust-overlay.overlays.default
+        emacs-overlay.overlay
+      ];
       environment.systemPackages = [
         (pkgs.rust-bin.stable.latest.default.override {
           extensions = [ "rust-src" ];

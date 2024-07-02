@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../modules/emacs.nix
+    ../../modules/emacs
   ];
 
   # This value determines the Home Manager release that your configuration is

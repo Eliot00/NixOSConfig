@@ -1,0 +1,439 @@
+#+TITLE: My Emacs Config
+#+AUTHOR: Elliot
+#+PROPERTY: header-args:emacs-lisp :tangle yes
+
+* Basic
+
+Declare lexical binding:
+
+#+BEGIN_SRC emacs-lisp
+;; -*- lexical-binding: t -*-
+#+END_SRC
+
+[[https://github.com/jwiegley/use-package][use-package]] is added automatically by the nix emacs overlay.
+Here we just make sure we don't have to keep typing ~:ensure t~:
+#+begin_src emacs-lisp
+(setq use-package-always-ensure t)
+#+end_src
+
+Similar to `add-to-list', but accepts a list as 2nd argument:
+#+BEGIN_SRC emacs-lisp
+(defun add-list-to-list (dst src)
+  (set dst
+       (append (eval dst) src)))
+#+END_SRC
+
+簡化確認操作：
+#+BEGIN_SRC emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+** 命令行歷史
+
+#+BEGIN_SRC emacs-lisp
+(use-package savehist
+  :ensure nil
+  :hook (after-init . savehist-mode)
+  :init (setq enable-recursive-minibuffers t ; Allow commands in minibuffers
+              history-length 1000
+              savehist-additional-variables '(mark-ring
+                                              global-mark-ring
+                                              search-ring
+                                              regexp-search-ring
+                                              extended-command-history)
+              savehist-autosave-interval 300))
+#+END_SRC
+
+* UI
+
+Change basic editor style:
+
+#+BEGIN_SRC emacs-lisp
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(setq cursor-type 'bar)
+(setq use-dialog-box nil)               ; 鼠标操作不使用对话框
+(setq inhibit-default-init t)           ; 不加载 `default' 库
+(setq inhibit-startup-screen t)         ; 不加载启动画面
+(setq inhibit-startup-message t)        ; 不加载启动消息
+(setq inhibit-startup-buffer-menu t)    ; 不显示缓冲区列表
+(column-number-mode t)                  ; 在 Mode line 上显示列号
+(global-display-line-numbers-mode 1)         ; 在 Window 显示行号
+#+END_SRC
+
+** Font
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'default nil :height 160 :font "LXGW WenKai Mono")
+#+END_SRC
+
+** Theme
+
+#+BEGIN_SRC emacs-lisp
+(use-package ef-themes
+  :init
+  ;; set two specific themes and switch between them
+  (setq ef-themes-to-toggle '(ef-summer ef-winter))
+
+  (setq ef-themes-headings
+    '((0 variable-pitch light 1.9)
+      (1 variable-pitch light 1.8)
+      (2 variable-pitch regular 1.7)
+      (3 variable-pitch regular 1.6)
+      (4 variable-pitch regular 1.5)
+      (5 variable-pitch 1.4) ; absence of weight means `bold'
+      (6 variable-pitch 1.3)
+      (7 variable-pitch 1.2)
+      (t variable-pitch 1.1)))
+  ;; They are nil by default...
+  (setq ef-themes-mixed-fonts t
+    ef-themes-variable-pitch-ui t)
+
+  (setq ef-themes-region '(intense no-extend neutral))
+  ;; Disable all other themes to avoid awkward blending:
+  (mapc #'disable-theme custom-enabled-themes)
+
+  (ef-themes-select 'ef-spring))
+#+END_SRC
+
+** Modeline
+
+#+BEGIN_SRC emacs-lisp
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
+  :init
+  (setq nerd-icons-font-family "FiraCode Nerd Font Mono")
+  :custom
+  (doom-modeline-irc nil)
+  (doom-modeline-mu4e nil)
+  (doom-modeline-unicode-fallback t)
+  (doom-modeline-enable-word-count t))
+#+END_SRC
+
+* 快捷鍵
+
+使用Evil模擬Vim鍵位
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil
+  :init
+  (evil-mode)
+  (setq evil-want-Y-yank-to-eol t))
+#+END_SRC
+
+undo tree:
+#+BEGIN_SRC emacs-lisp
+(use-package undo-tree
+  :diminish
+  :init
+  (global-undo-tree-mode 1)
+  (setq undo-tree-auto-save-history nil)
+  (evil-set-undo-system 'undo-tree))
+#+END_SRC
+
+* 筆記&文稿
+
+主要用於個人筆記
+
+orgmode配置:
+#+BEGIN_SRC emacs-lisp
+(use-package org
+  :mode ("\\.org\\'" . org-mode)
+  :hook ((org-mode . visual-line-mode))
+  :commands (org-find-exact-headline-in-buffer org-set-tags)
+  :custom
+  ;; 启用一些子模块
+  (org-modules '(ol-bibtex ol-gnus ol-info ol-eww org-habit org-protocol))
+  ;; 在按M-RET时，是否根据光标所在的位置分行，这里设置为是
+  ;; (org-M-RET-may-split-line '((default . nil)))
+  ;; 一些Org mode自带的美化设置
+  ;; 标题行美化
+  (org-fontify-whole-heading-line t)
+  ;; 设置标题行折叠符号
+  (org-ellipsis " ▾")
+  ;; 在活动区域内的所有标题栏执行某些命令
+  (org-loop-over-headlines-in-active-region t)
+  ;; TODO标签美化
+  (org-fontify-todo-headline t)
+  ;; DONE标签美化
+  (org-fontify-done-headline t)
+  ;; 引用块美化
+  (org-fontify-quote-and-verse-blocks t)
+  ;; 隐藏宏标记
+  (org-hide-macro-markers t)
+  ;; 隐藏强调标签
+  (org-hide-emphasis-markers t)
+  ;; 高亮latex语法
+  (org-highlight-latex-and-related '(native script entities))
+  ;; 以UTF-8显示
+  (org-pretty-entities t)
+  ;; 是否隐藏标题栏的前置星号，这里我们通过org-modern来隐藏
+  ;; (org-hide-leading-stars t)
+  ;; 当启用缩进模式时自动隐藏前置星号
+  (org-indent-mode-turns-on-hiding-stars t)
+  ;; 自动启用缩进
+  (org-startup-indented t)
+  ;; 根据标题栏自动缩进文本
+  (org-adapt-indentation t)
+  ;; 自动显示图片
+  (org-startup-with-inline-images t)
+  ;; 默认以Overview的模式展示标题行
+  (org-startup-folded 'overview)
+  ;; 允许字母列表
+  (org-list-allow-alphabetical t)
+  ;; 列表的下一级设置
+  (org-list-demote-modify-bullet '(
+                                   ("-"  . "+")
+                                   ("+"  . "1.")
+                                   ("1." . "a.")
+                                  ))
+  ;; 编辑时检查是否在折叠的不可见区域
+  (org-fold-catch-invisible-edits 'smart)
+  ;; 在当前位置插入新标题行还是在当前标题行后插入，这里设置为当前位置
+  (org-insert-heading-respect-content nil)
+  ;; 设置图片的最大宽度，如果有imagemagick支持将会改变图片实际宽度
+  ;; 四种设置方法：(1080), 1080, t, nil
+  (org-image-actual-width nil)
+  ;; imenu的最大深度，默认为2
+  (org-imenu-depth 4)
+  ;; 回车要不要触发链接，这里设置不触发
+  (org-return-follows-link nil)
+  ;; 上标^下标_是否需要特殊字符包裹，这里设置需要用大括号包裹
+  (org-use-sub-superscripts '{})
+  ;; 复制粘贴标题行的时候删除id
+  (org-clone-delete-id t)
+  ;; 粘贴时调整标题行的级别
+  (org-yank-adjusted-subtrees t)
+
+  ;; TOOD的关键词设置，可以设置不同的组
+  (org-todo-keywords '((sequence "TODO(t)" "DOING(i!)" "|" "DONE(d!)")))
+  ;; TODO关键词的样式设置
+  (org-todo-keyword-faces '(("TODO"       :foreground "#7c7c75" :weight bold)
+                            ("DOING"        :foreground "#0098dd" :weight bold)
+                            ("DONE"       :foreground "#50a14f" :weight bold)))
+  ;; 使用专家模式选择标题栏状态
+  (org-use-fast-todo-selection 'expert)
+  ;; 父子标题栏状态有依赖
+  (org-enforce-todo-dependencies t)
+  ;; 标题栏和任务复选框有依赖
+  (org-enforce-todo-checkbox-dependencies t)
+  ;; 优先级样式设置
+  (org-priority-faces '((?A :foreground "red")
+                        (?B :foreground "orange")
+                        (?C :foreground "yellow")))
+  ;; 标题行全局属性设置
+  (org-global-properties '(("EFFORT_ALL" . "0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 7:00 8:00")
+                           ("APPT_WARNTIME_ALL" . "0 5 10 15 20 25 30 45 60")
+                           ("RISK_ALL" . "Low Medium High")
+                           ("STYLE_ALL" . "habit")))
+  ;; Org columns的默认格式
+  (org-columns-default-format "%25ITEM %TODO %SCHEDULED %DEADLINE %3PRIORITY %TAGS %CLOCKSUM %EFFORT{:}")
+  ;; 当状态从DONE改成其他状态时，移除 CLOSED: [timestamp]
+  (org-closed-keep-when-no-todo t)
+  ;; DONE时加上时间戳
+  (org-log-done 'time)
+  ;; 重复执行时加上时间戳
+  (org-log-repeat 'time)
+  ;; Deadline修改时加上一条记录
+  (org-log-redeadline 'note)
+  ;; Schedule修改时加上一条记录
+  (org-log-reschedule 'note)
+  ;; 以抽屉的方式记录
+  (org-log-into-drawer t)
+  ;; 紧接着标题行或者计划/截止时间戳后加上记录抽屉
+  (org-log-state-notes-insert-after-drawers nil)
+
+  ;; refile使用缓存
+  (org-refile-use-cache t)
+  ;; refile的目的地，这里设置的是agenda文件的所有标题
+  (org-refile-targets '((org-agenda-files . (:maxlevel . 9))))
+  ;; 将文件名加入到路径
+  (org-refile-use-outline-path 'file)
+  ;; 是否按步骤refile
+  (org-outline-path-complete-in-steps nil)
+  ;; 允许创建新的标题行，但需要确认
+  (org-refile-allow-creating-parent-nodes 'confirm)
+
+  ;; 设置标签的默认位置，默认是第77列右对齐
+  ;; (org-tags-column -77)
+  ;; 自动对齐标签
+  (org-auto-align-tags t)
+  ;; 标签不继承
+  (org-use-tag-inheritance nil)
+  ;; 在日程视图的标签不继承
+  (org-agenda-use-tag-inheritance nil)
+  ;; 标签快速选择
+  (org-use-fast-tag-selection t)
+  ;; 标签选择不需要回车确认
+  (org-fast-tag-selection-single-key t)
+  ;; 定义了有序属性的标题行也加上 OREDERD 标签
+  (org-track-ordered-property-with-tag t)
+  )
+#+END_SRC
+
+org-appear:
+#+BEGIN_SRC emacs-lisp
+(use-package org-appear
+  :hook (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-autolinks t)
+  (setq org-appear-autosubmarkers t)
+  (setq org-appear-autoentities t)
+  (setq org-appear-autokeywords t)
+  (setq org-appear-inside-latex t))
+#+END_SRC
+
+** 雙鏈筆記
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-roam
+  :custom
+  (org-roam-directory
+    (file-truename "~/Documents/Notes"))
+  (org-roam-mode-sections
+    (list #'org-roam-backlinks-section
+          #'org-roam-reflinks-section
+    ))
+  :config
+  (org-roam-db-autosync-mode))
+#+END_SRC
+
+* Programming
+
+** General
+
+#+BEGIN_SRC emacs-lisp
+(icomplete-mode 1)
+(global-auto-revert-mode t)                  ; 当另一程序修改了文件时，让 Emacs 及时刷新 Buffer
+(delete-selection-mode t)                    ; 选中文本后输入文本会替换文本（更符合我们习惯了的其它编辑器的逻辑）
+(setq make-backup-files nil)                 ; 關閉文件自動备份
+(setq auto-save-default nil)                 ; 關閉文件自動保存
+(add-hook 'prog-mode-hook #'hs-minor-mode)   ; 编程模式下，可以折叠代码块
+#+END_SRC
+
+Enable flycheck:
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+#+END_SRC
+
+括號：
+#+BEGIN_SRC emacs-lisp
+(electric-pair-mode t)
+(add-hook 'prog-mode-hook #'show-paren-mode) ; 编程模式下，光标在括号上时高亮另一个括号
+#+END_SRC
+
+** Git
+
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :hook (git-commit-mode . flyspell-mode)
+  :custom
+  (magit-diff-refine-hunk t)
+  (magit-ediff-dwim-show-on-hunks t))
+#+END_SRC
+
+** 補全
+
+一些輔助函數：
+#+BEGIN_SRC emacs-lisp
+(defun nasy/orderless-dispatch-flex-first (_pattern index _total)
+  "orderless-flex for corfu."
+  (and (eq index 0) 'orderless-flex))
+
+(defun nasy/setup-corfu ()
+  "Setup corfu."
+  (setq-local orderless-matching-styles '(orderless-flex)
+              orderless-style-dispatchers nil)
+  (add-hook 'orderless-style-dispatchers #'nasy/orderless-dispatch-flex-first nil 'local))
+#+END_SRC
+
+*** Corfu
+
+#+BEGIN_SRC emacs-lisp
+(use-package corfu
+  :init
+  (setq corfu-cycle t)
+  (setq corfu-auto t)
+
+  (setq corfu-quit-at-boundary t)
+  (setq corfu-quit-no-match t)
+  (setq corfu-preview-current nil)
+  (setq corfu-min-width 80)
+  (setq corfu-max-width 100)
+  (setq corfu-auto-delay 0.2)
+  (setq corfu-auto-prefix 1)
+  (setq corfu-on-exact-match nil)
+  (global-corfu-mode)
+  (corfu-popupinfo-mode)
+
+  :hook (prog-mode . nasy/setup-corfu)
+  :config
+  ; (defun corfu-move-to-minibuffer ()
+  ;   (interactive)
+  ;   (let ((completion-extra-properties corfu--extra)
+  ;         completion-cycle-threshold completion-cycling)
+  ;     (toggle-chinese-search)
+  ;     (apply #'consult-completion-in-region completion-in-region--data)))
+  ; (define-key corfu-map "\M-m" #'corfu-move-to-minibuffer)
+
+  (define-key corfu-map (kbd "C-j") 'corfu-next)
+  (define-key corfu-map (kbd "C-k") 'corfu-previous)
+  (setq corfu-popupinfo-delay 0.4)
+  (setq corfu-popupinfo-max-width 120)
+  (setq corfu-popupinfo-max-height 40)
+  (define-key corfu-map (kbd "s-d") 'corfu-popupinfo-toggle)
+  (define-key corfu-map (kbd "s-p") #'corfu-popupinfo-scroll-down) ;; corfu-next
+  (define-key corfu-map (kbd "s-n") #'corfu-popupinfo-scroll-up) ;; corfu-previous
+  )
+#+END_SRC
+
+=TAB=​配置：
+#+BEGIN_SRC emacs-lisp
+(use-package emacs
+  :init
+  (setq completion-cycle-threshold 3)
+  (setq tab-always-indent 'complete))
+#+END_SRC
+
+**** Cape擴展
+
+#+BEGIN_SRC emacs-lisp
+(use-package cape
+  :init
+  ;; Add `completion-at-point-functions', used by `completion-at-point'.
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)  ; programming language keyword
+
+  ;; for Eshell:
+  ;; ===========
+  ;; Silence the pcomplete capf, no errors or messages!
+  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-silent)
+
+  ;; Ensure that pcomplete does not write to the buffer
+  ;; and behaves as a pure `completion-at-point-function'.
+  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-purify))
+#+END_SRC
+
+
+*** orderless
+
+#+BEGIN_SRC emacs-lisp
+(use-package orderless
+  :init
+  (setq completion-styles '(orderless partial-completion basic))
+  (setq completion-category-defaults nil)
+  (setq completion-category-overrides nil))
+#+END_SRC
+
+*** marginalia
+
+#+BEGIN_SRC emacs-lisp
+(use-package marginalia
+  :hook (after-init . marginalia-mode)
+  :custom
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil)))
+#+END_SRC
+
