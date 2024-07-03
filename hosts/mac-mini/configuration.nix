@@ -37,6 +37,7 @@
     nix.settings = {
         experimental-features = "nix-command flakes";
         sandbox = false;
+        substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
     };
 
     programs.fish = {
