@@ -307,7 +307,8 @@ orgmode配置:
   (org-fast-tag-selection-single-key t)
   ;; 定义了有序属性的标题行也加上 OREDERD 标签
   (org-track-ordered-property-with-tag t)
-  )
+  ;; 禁用代碼快中的tab縮進
+  (org-src-tab-acts-natively nil))
 #+END_SRC
 
 ** 美化
@@ -346,19 +347,22 @@ org-modern:
 org-appear:
 #+BEGIN_SRC emacs-lisp
 (use-package org-appear
-  :hook (org-mode . org-appear-mode)
-  :init
-  (setq org-appear-autolinks t
-        org-appear-autosubmarkers t
-        org-appear-autoentities t
-        org-appear-autokeywords t
-        org-appear-inside-latex t))
+  :after org
+  :custom
+  (org-appear-autolinks t)
+  (org-appear-autosubmarkers t)
+  (org-appear-autoentities t)
+  (org-appear-autokeywords t)
+  (org-appear-inside-latex t)
+  :hook
+  (org-mode . org-appear-mode))
 #+END_SRC
 
 ** 習慣
 
 #+BEGIN_SRC emacs-lisp
 (use-package org-habit
+  :ensure nil
   :defer t
   :custom
   (org-habit-show-habits t)
@@ -409,6 +413,12 @@ Enable flycheck:
 #+BEGIN_SRC emacs-lisp
 (electric-pair-mode t)
 (add-hook 'prog-mode-hook #'show-paren-mode) ; 编程模式下，光标在括号上时高亮另一个括号
+#+END_SRC
+
+空格縮進：
+#+BEGIN_SRC emacs-lisp
+(defun disable-tabs () (setq indent-tabs-mode nil))
+(add-hook 'prog-mode-hook 'disable-tabs)
 #+END_SRC
 
 ** Git
