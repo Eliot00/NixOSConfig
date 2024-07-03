@@ -10,6 +10,11 @@ Declare lexical binding:
 ;; -*- lexical-binding: t -*-
 #+END_SRC
 
+GC:
+#+BEGIN_SRC emacs-lisp
+(setq gc-cons-threshold (* 50 1000 1000))
+#+END_SRC
+
 [[https://github.com/jwiegley/use-package][use-package]] is added automatically by the nix emacs overlay.
 Here we just make sure we don't have to keep typing ~:ensure t~:
 #+begin_src emacs-lisp
@@ -28,22 +33,6 @@ Similar to `add-to-list', but accepts a list as 2nd argument:
 (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
-** 命令行歷史
-
-#+BEGIN_SRC emacs-lisp
-(use-package savehist
-  :ensure nil
-  :hook (after-init . savehist-mode)
-  :init (setq enable-recursive-minibuffers t ; Allow commands in minibuffers
-              history-length 1000
-              savehist-additional-variables '(mark-ring
-                                              global-mark-ring
-                                              search-ring
-                                              regexp-search-ring
-                                              extended-command-history)
-              savehist-autosave-interval 300))
-#+END_SRC
-
 * UI
 
 Change basic editor style:
@@ -53,18 +42,14 @@ Change basic editor style:
 (scroll-bar-mode -1)
 (setq cursor-type 'bar)
 (setq use-dialog-box nil)               ; 鼠标操作不使用对话框
-(setq inhibit-default-init t)           ; 不加载 `default' 库
-(setq inhibit-startup-screen t)         ; 不加载启动画面
-(setq inhibit-startup-message t)        ; 不加载启动消息
-(setq inhibit-startup-buffer-menu t)    ; 不显示缓冲区列表
 (column-number-mode t)                  ; 在 Mode line 上显示列号
-(global-display-line-numbers-mode 1)         ; 在 Window 显示行号
+(global-display-line-numbers-mode 1)    ; 在 Window 显示行号
 #+END_SRC
 
 ** Font
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default nil :height 160 :font "LXGW WenKai Mono")
+(set-face-attribute 'default nil :height 160 :font "FiraCode Nerd Font Mono")
 #+END_SRC
 
 ** Theme
@@ -76,15 +61,12 @@ Change basic editor style:
   (setq ef-themes-to-toggle '(ef-summer ef-winter))
 
   (setq ef-themes-headings
-    '((0 variable-pitch light 1.9)
-      (1 variable-pitch light 1.8)
-      (2 variable-pitch regular 1.7)
-      (3 variable-pitch regular 1.6)
-      (4 variable-pitch regular 1.5)
-      (5 variable-pitch 1.4) ; absence of weight means `bold'
-      (6 variable-pitch 1.3)
-      (7 variable-pitch 1.2)
-      (t variable-pitch 1.1)))
+    '((0 . (bold 1))
+      (1 . (bold 1))
+      (2 . (rainbow bold 1))
+      (3 . (rainbow bold 1))
+      (4 . (rainbow bold 1))
+      (t . (rainbow bold 1))))
   ;; They are nil by default...
   (setq ef-themes-mixed-fonts t
     ef-themes-variable-pitch-ui t)
@@ -94,6 +76,34 @@ Change basic editor style:
   (mapc #'disable-theme custom-enabled-themes)
 
   (ef-themes-select 'ef-spring))
+#+END_SRC
+
+** 起始畫面
+
+禁用默認首屏：
+#+BEGIN_SRC emacs-lisp
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package dashboard
+    :init
+    (setq initial-buffer-choice 'dashboard-open)
+    (setq dashboard-set-heading-icons t)
+    (setq dashboard-set-file-icons t)
+    (setq dashboard-startup-banner 'logo)
+    (setq dashboard-center-content t) ;; set to 't' for centered content
+    (setq dashboard-items '((recents . 5)
+                            (agenda . 5)
+                            (bookmarks . 3)
+                            (projects . 3)
+                            (registers . 3)))
+    :custom
+    (dashboard-modify-heading-icons '((recents . "file-text")
+                                      (bookmarks . "book")))
+    :config
+    (dashboard-setup-startup-hook))
 #+END_SRC
 
 ** Modeline
@@ -112,13 +122,20 @@ Change basic editor style:
 
 * 快捷鍵
 
+** Evil
+
 使用Evil模擬Vim鍵位
 
 #+BEGIN_SRC emacs-lisp
 (use-package evil
   :init
   (evil-mode)
-  (setq evil-want-Y-yank-to-eol t))
+  (setq evil-want-Y-yank-to-eol t)
+  (setq evil-want-C-u-scroll t)
+  :hook ((org-mode . (lambda ()
+                       (evil-define-key 'normal org-mode-map
+                         (kbd "SPC") 'org-cycle
+                         (kbd "<return>") 'org-open-at-point)))))
 #+END_SRC
 
 undo tree:
@@ -139,8 +156,30 @@ orgmode配置:
 #+BEGIN_SRC emacs-lisp
 (use-package org
   :mode ("\\.org\\'" . org-mode)
-  :hook ((org-mode . visual-line-mode))
+  :hook ((org-mode . visual-line-mode)
+         (org-mode . my/org-mono-font))
   :commands (org-find-exact-headline-in-buffer org-set-tags)
+  :custom-face
+    ;; 设置Org mode标题以及每级标题行的大小
+    (org-document-title ((t (:height 1.75 :weight bold))))
+    (org-level-1 ((t (:height 1.2 :weight bold))))
+    (org-level-2 ((t (:height 1.15 :weight bold))))
+    (org-level-3 ((t (:height 1.1 :weight bold))))
+    (org-level-4 ((t (:height 1.05 :weight bold))))
+    (org-level-5 ((t (:height 1.0 :weight bold))))
+    (org-level-6 ((t (:height 1.0 :weight bold))))
+    (org-level-7 ((t (:height 1.0 :weight bold))))
+    (org-level-8 ((t (:height 1.0 :weight bold))))
+    (org-level-9 ((t (:height 1.0 :weight bold))))
+    ;; 设置代码块用上下边线包裹
+    (org-block-begin-line ((t (:underline t :background unspecified))))
+    (org-block-end-line ((t (:overline t :underline nil :background unspecified))))
+  :config
+  (defun my/org-mono-font ()
+    (face-remap-add-relative 'default :family "LXGW WenKai Mono"))
+  (setq org-blank-before-new-entry '((heading . t)
+                                     (plain-list-item . auto)
+                                    ))
   :custom
   ;; 启用一些子模块
   (org-modules '(ol-bibtex ol-gnus ol-info ol-eww org-habit org-protocol))
@@ -271,16 +310,64 @@ orgmode配置:
   )
 #+END_SRC
 
+** 美化
+
+org-modern:
+#+BEGIN_SRC emacs-lisp
+(use-package org-modern
+  :hook (after-init . (lambda ()
+                        (setq org-modern-hide-stars 'leading)
+                        (global-org-modern-mode t)))
+  :config
+  ;; 标题行型号字符
+  (setq org-modern-star ["◉" "○" "✸" "✳" "◈" "◇" "✿" "❀" "✜"])
+  ;; 额外的行间距，0.1表示10%，1表示1px
+  (setq-default line-spacing 0.1)
+  ;; tag边框宽度，还可以设置为 `auto' 即自动计算
+  (setq org-modern-label-border 1)
+  ;; 设置表格竖线宽度，默认为3
+  (setq org-modern-table-vertical 2)
+  ;; 设置表格横线为0，默认为0.1
+  (setq org-modern-table-horizontal 0)
+  ;; 列表符号美化
+  (setq org-modern-list
+        '((?- . "•")
+          (?+ . "◦")
+          (?* . "▹")))
+  ;; 代码块左边加上一条竖边线（需要Org mode顶头，如果启用了 `visual-fill-column-mode' 会很难看）
+  (setq org-modern-block-fringe t)
+  ;; 代码块类型美化，我们使用了 `prettify-symbols-mode'
+  (setq org-modern-block-name nil)
+  ;; #+关键字美化，我们使用了 `prettify-symbols-mode'
+  (setq org-modern-keyword nil)
+  )
+#+END_SRC
+
 org-appear:
 #+BEGIN_SRC emacs-lisp
 (use-package org-appear
   :hook (org-mode . org-appear-mode)
-  :config
-  (setq org-appear-autolinks t)
-  (setq org-appear-autosubmarkers t)
-  (setq org-appear-autoentities t)
-  (setq org-appear-autokeywords t)
-  (setq org-appear-inside-latex t))
+  :init
+  (setq org-appear-autolinks t
+        org-appear-autosubmarkers t
+        org-appear-autoentities t
+        org-appear-autokeywords t
+        org-appear-inside-latex t))
+#+END_SRC
+
+** 習慣
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-habit
+  :defer t
+  :custom
+  (org-habit-show-habits t)
+  (org-habit-graph-column 70)
+  (org-habit-show-all-today t)
+  (org-habit-show-done-always-green t)
+  (org-habit-scheduled-past-days t)
+  ;; org habit show 7 days before today and 7 days after today. ! means not done. * means done.
+  (org-habit-preceding-days 7))
 #+END_SRC
 
 ** 雙鏈筆記
@@ -353,48 +440,22 @@ Enable flycheck:
 
 #+BEGIN_SRC emacs-lisp
 (use-package corfu
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)
+  (corfu-quit-no-match t)
+  (corfu-separator ?\s)
+  (corfu-preselect 'prompt)
+  (corfu-on-exact-match nil)
   :init
-  (setq corfu-cycle t)
-  (setq corfu-auto t)
-
-  (setq corfu-quit-at-boundary t)
-  (setq corfu-quit-no-match t)
-  (setq corfu-preview-current nil)
-  (setq corfu-min-width 80)
-  (setq corfu-max-width 100)
-  (setq corfu-auto-delay 0.2)
-  (setq corfu-auto-prefix 1)
-  (setq corfu-on-exact-match nil)
   (global-corfu-mode)
-  (corfu-popupinfo-mode)
-
-  :hook (prog-mode . nasy/setup-corfu)
   :config
-  ; (defun corfu-move-to-minibuffer ()
-  ;   (interactive)
-  ;   (let ((completion-extra-properties corfu--extra)
-  ;         completion-cycle-threshold completion-cycling)
-  ;     (toggle-chinese-search)
-  ;     (apply #'consult-completion-in-region completion-in-region--data)))
-  ; (define-key corfu-map "\M-m" #'corfu-move-to-minibuffer)
-
-  (define-key corfu-map (kbd "C-j") 'corfu-next)
-  (define-key corfu-map (kbd "C-k") 'corfu-previous)
-  (setq corfu-popupinfo-delay 0.4)
-  (setq corfu-popupinfo-max-width 120)
-  (setq corfu-popupinfo-max-height 40)
-  (define-key corfu-map (kbd "s-d") 'corfu-popupinfo-toggle)
-  (define-key corfu-map (kbd "s-p") #'corfu-popupinfo-scroll-down) ;; corfu-next
-  (define-key corfu-map (kbd "s-n") #'corfu-popupinfo-scroll-up) ;; corfu-previous
-  )
-#+END_SRC
-
-=TAB=​配置：
-#+BEGIN_SRC emacs-lisp
-(use-package emacs
-  :init
   (setq completion-cycle-threshold 3)
-  (setq tab-always-indent 'complete))
+  (setq tab-always-indent 'complete)
+  (define-key corfu-map (kbd "<tab>") 'corfu-next)
+  (define-key corfu-map (kbd "S-<tab>") 'corfu-previous)
+  :hook
+  (prog-mode . nasy/setup-corfu))
 #+END_SRC
 
 **** Cape擴展
@@ -422,13 +483,56 @@ Enable flycheck:
 
 #+BEGIN_SRC emacs-lisp
 (use-package orderless
-  :init
-  (setq completion-styles '(orderless partial-completion basic))
-  (setq completion-category-defaults nil)
-  (setq completion-category-overrides nil))
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
 #+END_SRC
 
-*** marginalia
+* minibuffer增強
+
+#+BEGIN_SRC emacs-lisp
+(setq enable-recursive-minibuffers t)
+#+END_SRC
+
+** 命令行歷史
+
+#+BEGIN_SRC emacs-lisp
+(use-package savehist
+  :ensure nil
+  :hook (after-init . savehist-mode)
+  :init (setq enable-recursive-minibuffers t ; Allow commands in minibuffers
+              history-length 1000
+              savehist-additional-variables '(mark-ring
+                                              global-mark-ring
+                                              search-ring
+                                              regexp-search-ring
+                                              extended-command-history)
+              savehist-autosave-interval 300))
+#+END_SRC
+
+** 補全
+
+#+BEGIN_SRC emacs-lisp
+(use-package vertico
+  :init
+  (vertico-mode)
+  :config
+  ;; Different scroll margin
+  (setq vertico-scroll-margin 0)
+
+  ;; Show more candidates
+  (setq vertico-count 15)
+
+  ;; Grow and shrink the Vertico minibuffer
+  (setq vertico-resize t)
+
+  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+  (setq vertico-cycle t)
+  )
+#+END_SRC
+
+** marginalia
 
 #+BEGIN_SRC emacs-lisp
 (use-package marginalia

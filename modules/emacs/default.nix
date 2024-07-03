@@ -35,10 +35,4 @@
     #   org-roam-ui
     # ];
   };
-  home.file = {
-    ".emacs.d/early-init.el".text = ''
-      (setq gc-cons-threshold most-positive-fixnum)
-      (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
-    '';
-  };
 }
