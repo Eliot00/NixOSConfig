@@ -405,10 +405,23 @@ org-appear:
 (add-hook 'prog-mode-hook #'hs-minor-mode)   ; 编程模式下，可以折叠代码块
 #+END_SRC
 
-Enable flycheck:
+Enable flymake:
 #+BEGIN_SRC emacs-lisp
-(use-package flycheck
-  :hook (prog-mode . flycheck-mode))
+(use-package flymake
+  :ensure nil
+  :hook (prog-mode . flymake-mode))
+#+END_SRC
+
+讓flymake信息顯示在側邊：
+#+BEGIN_SRC emacs-lisp
+(use-package sideline-flymake
+  :custom
+  (sideline-flymake-display-mode 'line))
+
+(use-package sideline
+  :hook (flymake-mode . sideline-mode)
+  :custom
+  (sideline-backends-right '(sideline-flymake)))
 #+END_SRC
 
 括號：
@@ -452,37 +465,21 @@ Enable flycheck:
 
 #+BEGIN_SRC emacs-lisp
 (use-package corfu
+  :hook ((prog-mode . corfu-mode)
+         (prog-mode . nasy/setup-corfu)
+         (org-mode . corfu-mode)
+         (corfu-mode . corfu-popupinfo-mode))
   :custom
   (corfu-cycle t)
   (corfu-auto t)
-  (corfu-quit-no-match t)
-  (corfu-separator ?\s)
+  (corfu-quit-no-match 'separator)
   (corfu-preselect 'prompt)
   (corfu-on-exact-match nil)
-  :init
-  (global-corfu-mode)
   :config
   (setq completion-cycle-threshold 3)
   (setq tab-always-indent 'complete)
   (define-key corfu-map (kbd "<tab>") 'corfu-next)
-  (define-key corfu-map (kbd "S-<tab>") 'corfu-previous)
-  :hook
-  (prog-mode . nasy/setup-corfu))
-;; (use-package corfu
-;;   :hook ((prog-mode . corfu-mode)
-;;          (org-mode . corfu-mode)
-;;          (corfu-mode . corfu-popupinfo-mode))
-;;   :custom
-;;   (corfu-cycle t)
-;;   (corfu-auto t)
-;;   (corfu-quit-no-match 'separator)
-;;   (corfu-preselect 'prompt)
-;;   (corfu-on-exact-match nil)
-;;   :config
-;;   (setq completion-cycle-threshold 3)
-;;   (setq tab-always-indent 'complete)
-;;   (define-key corfu-map (kbd "<tab>") 'corfu-next)
-;;   (define-key corfu-map (kbd "S-<tab>") 'corfu-previous))
+  (define-key corfu-map (kbd "S-<tab>") 'corfu-previous))
 #+END_SRC
 
 **** Cape擴展
@@ -614,7 +611,11 @@ Enable flycheck:
 
   ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
   (setq vertico-cycle t)
-  )
+  :general
+  (:keymaps 'vertico-map
+            "C-j" 'vertico-next
+            "C-k" 'vertico-previous
+            "C-f" 'vertico-exit))
 #+END_SRC
 
 ** marginalia
