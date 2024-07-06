@@ -67,6 +67,7 @@
   };
   services.desktopManager.plasma6.enable = true;
   services.desktopManager.plasma6.enableQt5Integration = false;
+  programs.hyprland.enable = true;
 
   # Enable sound.
   sound.enable = true;
@@ -94,7 +95,7 @@
 
       jetbrains-mono
       cascadia-code
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" ]; })
     ];
     fontconfig = {
       defaultFonts = {
@@ -112,9 +113,9 @@
   environment.systemPackages = with pkgs; [
     android-studio
     commit-formatter
+    devenv
     firefox
     gcc
-    ghc
     nodejs
     openssl
     ossutil
@@ -124,7 +125,6 @@
     python3
     racket
     ripgrep
-    stack
     wget
 
     fishPlugins.pure
@@ -203,6 +203,7 @@
         "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       ];
       auto-optimise-store = true;
+      trusted-users = [ "root" "elliot" ];
     };
     gc = {
       automatic = true;
@@ -211,8 +212,6 @@
     };
     extraOptions = ''
       experimental-features = nix-command flakes
-      keep-outputs = true
-      keep-derivations = true
     '';
   };
 }

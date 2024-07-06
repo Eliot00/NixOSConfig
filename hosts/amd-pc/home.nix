@@ -62,8 +62,4 @@
       "kitty_mod+t" = "new_tab_with_cwd";
     };
   };
-
-  wayland.windowManager.hyprland = {
-    enable = true;
-  };
 }
