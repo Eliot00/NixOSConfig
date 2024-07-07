@@ -67,7 +67,6 @@
   };
   services.desktopManager.plasma6.enable = true;
   services.desktopManager.plasma6.enableQt5Integration = false;
-  programs.hyprland.enable = true;
 
   # Enable sound.
   sound.enable = true;
@@ -117,11 +116,9 @@
     firefox
     gcc
     nodejs
-    openssl
     ossutil
     pandoc
     pdm
-    pkg-config
     python3
     racket
     ripgrep
