@@ -508,20 +508,10 @@ Enable flymake:
 讀取nix產生的環境變量，在mac上需要用nix安裝的direnv，才能在後續用envrc讀devShell：
 #+BEGIN_SRC emacs-lisp
 (when (eq system-type 'darwin)
-  ;; 加载你的 Nix shell 配置文件
-  (defun my/load-nix-shell-env ()
-    "Load the environment variables from the nix shell."
-    (interactive)
-    (let ((path-from-shell (replace-regexp-in-string
-                            "[ \t\n]*$"
-                            ""
-                            (shell-command-to-string "/run/current-system/sw/bin/bash --login -i -c 'echo $PATH'"))))
-      (setenv "PATH" path-from-shell)
-      (setq eshell-path-env path-from-shell)
-      (setq exec-path (split-string path-from-shell path-separator))))
-
-  ;; 调用这个函数来加载 Nix shell 环境
-  (my/load-nix-shell-env))
+  (use-package exec-path-from-shell
+    :config
+    (setq exec-path-from-shell-shell-name "/run/current-system/sw/bin/fish")
+    (exec-path-from-shell-initialize)))
 #+END_SRC
 
 使用[[https://github.com/purcell/envrc][envrc]]加載​~devShell~​：
