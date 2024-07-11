@@ -47,6 +47,10 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   programs.fish.enable = true;
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+  };
   programs.kitty = {
     enable = true;
     theme = "Everforest Light Soft";
