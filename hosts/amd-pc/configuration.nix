@@ -122,6 +122,7 @@
     racket
     ripgrep
     wget
+    nheko
 
     fishPlugins.pure
   ];

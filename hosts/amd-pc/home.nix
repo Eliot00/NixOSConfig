@@ -7,7 +7,6 @@
   home.stateVersion = "21.11";
   home.packages = with pkgs; [
     tdesktop
-    kdePackages.neochat
 
     anki-bin
     mpv # anki dependent on it
