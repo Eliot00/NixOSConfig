@@ -172,9 +172,6 @@ orgmode配置:
     (org-level-7 ((t (:height 1.0 :weight bold))))
     (org-level-8 ((t (:height 1.0 :weight bold))))
     (org-level-9 ((t (:height 1.0 :weight bold))))
-    ;; 设置代码块用上下边线包裹
-    (org-block-begin-line ((t (:underline t :background unspecified))))
-    (org-block-end-line ((t (:overline t :underline nil :background unspecified))))
   :config
   (defun my/org-mono-font ()
     (face-remap-add-relative 'default :family "LXGW WenKai Mono"))
@@ -247,20 +244,12 @@ orgmode配置:
 
   ;; TOOD的关键词设置，可以设置不同的组
   (org-todo-keywords '((sequence "TODO(t)" "DOING(i!)" "|" "DONE(d!)")))
-  ;; TODO关键词的样式设置
-  (org-todo-keyword-faces '(("TODO"       :foreground "#7c7c75" :weight bold)
-                            ("DOING"        :foreground "#0098dd" :weight bold)
-                            ("DONE"       :foreground "#50a14f" :weight bold)))
   ;; 使用专家模式选择标题栏状态
   (org-use-fast-todo-selection 'expert)
   ;; 父子标题栏状态有依赖
   (org-enforce-todo-dependencies t)
   ;; 标题栏和任务复选框有依赖
   (org-enforce-todo-checkbox-dependencies t)
-  ;; 优先级样式设置
-  (org-priority-faces '((?A :foreground "red")
-                        (?B :foreground "orange")
-                        (?C :foreground "yellow")))
   ;; 标题行全局属性设置
   (org-global-properties '(("EFFORT_ALL" . "0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 7:00 8:00")
                            ("APPT_WARNTIME_ALL" . "0 5 10 15 20 25 30 45 60")
@@ -319,31 +308,18 @@ orgmode配置:
 org-modern:
 #+BEGIN_SRC emacs-lisp
 (use-package org-modern
-  :hook (after-init . (lambda ()
-                        (setq org-modern-hide-stars 'leading)
-                        (global-org-modern-mode t)))
+  :hook ((org-mode . org-modern-mode)
+         (org-agenda-finalize . org-modern-agenda))
   :config
   ;; 标题行型号字符
   (setq org-modern-star ["◉" "○" "✸" "✳" "◈" "◇" "✿" "❀" "✜"])
   ;; 额外的行间距，0.1表示10%，1表示1px
   (setq-default line-spacing 0.1)
-  ;; tag边框宽度，还可以设置为 `auto' 即自动计算
-  (setq org-modern-label-border 1)
-  ;; 设置表格竖线宽度，默认为3
-  (setq org-modern-table-vertical 2)
-  ;; 设置表格横线为0，默认为0.1
-  (setq org-modern-table-horizontal 0)
   ;; 列表符号美化
   (setq org-modern-list
         '((?- . "•")
           (?+ . "◦")
           (?* . "▹")))
-  ;; 代码块左边加上一条竖边线（需要Org mode顶头，如果启用了 `visual-fill-column-mode' 会很难看）
-  (setq org-modern-block-fringe t)
-  ;; 代码块类型美化，我们使用了 `prettify-symbols-mode'
-  (setq org-modern-block-name nil)
-  ;; #+关键字美化，我们使用了 `prettify-symbols-mode'
-  (setq org-modern-keyword nil)
   )
 #+END_SRC
 
