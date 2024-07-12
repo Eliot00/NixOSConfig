@@ -4,6 +4,8 @@
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     environment.systemPackages = with pkgs; [
+        devenv
+
         python3
         pdm
 
@@ -38,6 +40,7 @@
         experimental-features = "nix-command flakes";
         sandbox = false;
         substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
+        trusted-users = [ "root" "elliot" ];
     };
 
     programs.fish = {
