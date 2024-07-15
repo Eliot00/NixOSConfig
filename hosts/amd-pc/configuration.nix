@@ -67,8 +67,6 @@
     xwayland.enable = false;
   };
 
-  # Enable sound.
-  sound.enable = true;
   hardware.pulseaudio.enable = true;
 
   hardware.bluetooth.enable = true;
@@ -164,7 +162,6 @@
     defaultEditor = true;
     package = pkgs.vim-full;
   };
-  programs.adb.enable = true;
 
   # List services that you want to enable:
 

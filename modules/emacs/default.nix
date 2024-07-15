@@ -7,7 +7,7 @@
       defaultInitFile = true;
       package = if pkgs.system == "aarch64-darwin"
                    then pkgs.emacs-macport
-                   else pkgs.emacs29-pgtk;
+                   else pkgs.emacs-pgtk;
       alwaysEnsure = true;
       alwaysTangle = true;
     };
