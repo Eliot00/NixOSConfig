@@ -47,7 +47,8 @@
   # };
   i18n.defaultLocale = "zh_CN.UTF-8";
   i18n.inputMethod = {
-    enabled = "fcitx5";
+    enable = true;
+    type = "fcitx5";
     fcitx5 = {
       addons = with pkgs; [ fcitx5-rime fcitx5-chinese-addons fcitx5-anthy ];
       waylandFrontend = true;
@@ -159,6 +160,7 @@
     Port 443
   '';
   programs.vim = {
+    enable = true;
     defaultEditor = true;
     package = pkgs.vim-full;
   };
