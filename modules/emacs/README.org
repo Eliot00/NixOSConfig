@@ -129,13 +129,28 @@ Change basic editor style:
 #+BEGIN_SRC emacs-lisp
 (use-package evil
   :init
+  ;; `evil-collection' assumes `evil-want-keybinding' is set to
+  ;; `nil' before loading `evil' and `evil-collection'
+  ;; @see https://github.com/emacs-evil/evil-collection#installation
+  (setq evil-want-keybinding nil)
   (evil-mode)
+  :config
   (setq evil-want-Y-yank-to-eol t)
   (setq evil-want-C-u-scroll t)
+  (evil-set-leader 'normal "\\")
   :hook ((org-mode . (lambda ()
                        (evil-define-key 'normal org-mode-map
                          (kbd "SPC") 'org-cycle
                          (kbd "<return>") 'org-open-at-point)))))
+#+END_SRC
+
+使用[[https://github.com/emacs-evil/evil-collection][evil-collection]]
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
 #+END_SRC
 
 undo tree:
@@ -502,17 +517,26 @@ Enable flymake:
 #+BEGIN_SRC emacs-lisp
 (use-package eglot
   :ensure nil
-  :hook (haskell-mode . eglot-ensure)
-  :init
-  (advice-add 'eglot-ensure :after 'my/eglot-keybindings))
+  :hook ((haskell-mode . eglot-ensure)
+         (prog-mode . my/eglot-keybindings)))
 #+END_SRC
 
 一些快捷鍵：
 #+BEGIN_SRC emacs-lisp
 (defun my/eglot-keybindings ()
-  (define-key evil-normal-state-map "ga" #'eglot-code-actions)
-  (define-key evil-normal-state-map "gd" #'xref-find-definitions)
-  (define-key evil-normal-state-map (kbd "K") #'eldoc))
+  (evil-define-key 'normal eglot-mode-map (kbd "<leader>a") #'eglot-code-actions)
+  (evil-define-key 'normal eglot-mode-map (kbd "<leader>rn") #'eglot-rename))
+#+END_SRC
+
+** Consult
+
+#+BEGIN_SRC emacs-lisp
+(use-package consult
+  :after evil
+  :config
+  (evil-define-key 'normal 'global (kbd "<leader>s") #'consult-line)
+  (evil-define-key 'normal 'global (kbd "<leader>f") #'consult-find)
+  (evil-define-key 'normal 'global (kbd "<leader>rg") #'consult-ripgrep))
 #+END_SRC
 
 ** 語言
@@ -571,7 +595,8 @@ Enable flymake:
   (setq vertico-resize t)
 
   ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
-  (setq vertico-cycle t))
+  (setq vertico-cycle t)
+  (define-key vertico-map [backspace] #'vertico-directory-delete-char))
 #+END_SRC
 
 一些額外配置：
