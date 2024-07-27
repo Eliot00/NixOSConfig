@@ -109,6 +109,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     android-studio
+    bun
     commit-formatter
     devenv
     firefox
