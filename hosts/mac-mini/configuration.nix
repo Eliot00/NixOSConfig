@@ -9,10 +9,11 @@
         python3
         pdm
 
+        bun
         nodejs
-        nodePackages.typescript
-        nodePackages.pnpm
-        nodePackages.pm2
+        pm2
+        pnpm
+        typescript
         yarn
 
         racket
