@@ -124,7 +124,7 @@
     racket
     ripgrep
     wget
-    nheko
+    # nheko
   ];
 
   environment.shellAliases = import ../../snips/alias.nix;
