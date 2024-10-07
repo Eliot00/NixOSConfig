@@ -65,10 +65,6 @@
   };
   services.desktopManager.plasma6.enable = true;
   services.desktopManager.plasma6.enableQt5Integration = false;
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = false;
-  };
 
   hardware.bluetooth.enable = true;
 

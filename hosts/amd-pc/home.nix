@@ -53,7 +53,7 @@
   };
   programs.kitty = {
     enable = true;
-    theme = "Everforest Light Soft";
+    themeFile = "everforest_light_soft";
     font = {
       name = "Cascadia Code NF";
       size = 18;
