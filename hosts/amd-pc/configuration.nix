@@ -57,14 +57,16 @@
     };
   };
 
-  services.displayManager.sddm = {
-    enable = true;
-    wayland = {
-      enable = true;
-    };
-  };
-  services.desktopManager.plasma6.enable = true;
-  services.desktopManager.plasma6.enableQt5Integration = false;
+  # services.displayManager.sddm = {
+  #   enable = true;
+  #   wayland = {
+  #     enable = true;
+  #   };
+  # };
+  # services.desktopManager.plasma6.enable = true;
+  # services.desktopManager.plasma6.enableQt5Integration = false;
+  services.desktopManager.cosmic.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
 
   hardware.bluetooth.enable = true;
 

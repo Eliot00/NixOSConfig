@@ -17,9 +17,6 @@
     yarn
     nodePackages.pnpm
 
-    # test unstable wayland ime protocols
-    weston
-
     qbittorrent
   ];
   programs.git = {
