@@ -118,7 +118,7 @@
     racket
     ripgrep
     wget
-    # nheko
+    fractal
   ];
 
   environment.shellAliases = import ../../snips/alias.nix;
