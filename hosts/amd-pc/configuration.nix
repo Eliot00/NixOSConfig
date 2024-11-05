@@ -120,7 +120,6 @@
     racket
     ripgrep
     wget
-    fractal
   ];
 
   environment.shellAliases = import ../../snips/alias.nix;
