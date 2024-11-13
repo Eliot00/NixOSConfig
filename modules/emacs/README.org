@@ -67,9 +67,6 @@ Change basic editor style:
       (3 . (rainbow bold 1))
       (4 . (rainbow bold 1))
       (t . (rainbow bold 1))))
-  ;; They are nil by default...
-  (setq ef-themes-mixed-fonts t
-    ef-themes-variable-pitch-ui t)
 
   (setq ef-themes-region '(intense no-extend neutral))
   ;; Disable all other themes to avoid awkward blending:
