@@ -466,6 +466,7 @@ Enable flymake:
   (corfu-quit-no-match 'separator)
   (corfu-preselect 'prompt)
   (corfu-on-exact-match nil)
+  (text-mode-ispell-word-completion nil)
   :config
   (setq completion-cycle-threshold 3)
   (setq tab-always-indent 'complete)
