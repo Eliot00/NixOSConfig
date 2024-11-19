@@ -14,6 +14,7 @@
         pm2
         pnpm
         typescript
+        typescript-language-server
         yarn
 
         racket
