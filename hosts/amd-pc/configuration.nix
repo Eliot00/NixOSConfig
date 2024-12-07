@@ -100,6 +100,7 @@
   environment.systemPackages = with pkgs; [
     android-studio
     bun
+    cachix
     commit-formatter
     devenv
     firefox
@@ -166,6 +167,10 @@
       substituters = lib.mkBefore [
         "https://mirrors.bfsu.edu.cn/nix-channels/store"
         "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+        "https://nix-community.cachix.org"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
       auto-optimise-store = true;
       trusted-users = [ "root" "elliot" ];
