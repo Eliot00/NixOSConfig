@@ -82,7 +82,7 @@
 
       jetbrains-mono
       cascadia-code
-      (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" ]; })
+      nerd-fonts.fira-code
     ];
     fontconfig = {
       defaultFonts = {
