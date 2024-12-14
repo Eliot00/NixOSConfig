@@ -8,7 +8,7 @@
   home.packages = with pkgs; [
     tdesktop
 
-    anki-bin
+    anki
     mpv # anki dependent on it
 
     vlc
