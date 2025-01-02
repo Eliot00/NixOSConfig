@@ -79,7 +79,7 @@
     isNormalUser = true;
     description = "Elliot Xu";
     extraGroups = [ "wheel" "networkmanager" "podman" ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
   };
 
   fonts = {
@@ -137,9 +137,6 @@
     enableSSHSupport = true;
   };
   programs.kdeconnect.enable = true;
-  programs.fish = {
-    enable = true;
-  };
   programs.ssh.extraConfig = ''
     Host github.com
     Hostname ssh.github.com

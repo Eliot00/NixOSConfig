@@ -43,10 +43,12 @@
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
-  programs.fish.enable = true;
+  programs.nushell = {
+    enable = true;
+    shellAliases = import ../../snips/alias.nix;
+  };
   programs.starship = {
     enable = true;
-    enableFishIntegration = true;
   };
   programs.kitty = {
     enable = true;
@@ -54,9 +56,6 @@
     font = {
       name = "Cascadia Code NF";
       size = 18;
-    };
-    shellIntegration = {
-      enableFishIntegration = true;
     };
     keybindings = {
       "kitty_mod+t" = "new_tab_with_cwd";
