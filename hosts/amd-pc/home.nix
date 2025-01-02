@@ -4,7 +4,7 @@
     ../../modules/emacs
   ];
 
-  home.stateVersion = "22.05";
+  home.stateVersion = "24.11";
   home.packages = with pkgs; [
     tdesktop
 
