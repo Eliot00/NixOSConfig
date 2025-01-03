@@ -125,6 +125,7 @@
     ripgrep
     supabase-cli
     wget
+    wl-clipboard-rs
   ];
 
   environment.shellAliases = import ../../snips/alias.nix;
