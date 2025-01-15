@@ -45,7 +45,7 @@
     htop
     ripgrep
     tree
-    pandoc
+    guile
   ];
 
   programs.fish.enable = true;
