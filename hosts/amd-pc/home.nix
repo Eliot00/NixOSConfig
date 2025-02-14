@@ -14,6 +14,9 @@
     vlc
     kdePackages.kate
 
+    rust-analyzer
+    typescript-language-server
+
     yarn
     nodePackages.pnpm
 
