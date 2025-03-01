@@ -129,6 +129,7 @@
   ];
 
   environment.shellAliases = import ../../snips/alias.nix;
+  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
