@@ -7,6 +7,7 @@
   home.stateVersion = "24.11";
   home.packages = with pkgs; [
     tdesktop
+    spotube
 
     anki
     mpv # anki dependent on it
