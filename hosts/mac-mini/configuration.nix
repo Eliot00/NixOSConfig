@@ -35,10 +35,6 @@
     nix.settings = {
         experimental-features = "nix-command flakes";
         sandbox = false;
-        substituters = [
-            "https://mirrors.ustc.edu.cn/nix-channels/store"
-            "https://mirror.sjtu.edu.cn/nix-channels/store"
-        ];
         trusted-users = [ "root" "elliot" ];
     };
 

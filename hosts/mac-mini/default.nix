@@ -7,6 +7,7 @@ let
 in nix-darwin.lib.darwinSystem {
   modules = [
     ./configuration.nix
+    ../../modules/substituters
     revision
 
     # Rust config
