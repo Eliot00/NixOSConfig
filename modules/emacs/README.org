@@ -471,6 +471,15 @@ Enable flymake:
   (define-key corfu-map (kbd "S-<tab>") 'corfu-previous))
 #+END_SRC
 
+加上 =kind-icon=
+
+#+BEGIN_SRC emacs-lisp
+(use-package kind-icon
+  :after corfu
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+#+END_SRC
+
 **** Cape擴展
 
 #+BEGIN_SRC emacs-lisp
