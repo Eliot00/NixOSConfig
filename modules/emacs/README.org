@@ -428,6 +428,7 @@ Enable flymake:
 
 #+BEGIN_SRC emacs-lisp
 (use-package magit
+  :defer t
   :hook (git-commit-mode . flyspell-mode)
   :custom
   (magit-diff-refine-hunk t)
@@ -524,7 +525,14 @@ Enable flymake:
 #+BEGIN_SRC emacs-lisp
 (use-package eglot
   :ensure nil
-  :hook ((haskell-mode . eglot-ensure)
+  :commands eglot
+  :config
+  (add-to-list 'eglot-server-programs
+               '(haskell-ts-mode . ("haskell-language-server-wrapper" "--lsp")))
+  :custom
+  (eglot-autoshutdown t)
+  :hook ((haskell-ts-mode . eglot-ensure)
+         (rust-ts-mode . eglot-ensure)
          (prog-mode . my/eglot-keybindings)))
 #+END_SRC
 
@@ -550,22 +558,22 @@ Enable flymake:
 
 設置treesit用於高亮、結構編輯等：
 #+BEGIN_SRC emacs-lisp
-(use-package treesit-auto
+(use-package treesit
+  :ensure nil
   :custom
-  (treesit-auto-install 'prompt)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+  (treesit-font-lock-level 4)
+  (treesit-language-source-alist
+    '((rust    . ("https://github.com/tree-sitter/tree-sitter-rust"))
+      (toml    . ("https://github.com/tree-sitter/tree-sitter-toml"))
+      (haskell . ("https://github.com/tree-sitter/tree-sitter-haskell"))))
+  :init
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode)))
 #+END_SRC
 
 *** Haskell
 
 #+BEGIN_SRC emacs-lisp
-(use-package haskell-mode
-  :defer t
-  :hook ((haskell-mode . interactive-haskell-mode)
-         (haskell-mode . haskell-indentation-mode)
-         (haskell-mode . haskell-auto-insert-module-template)))
+(use-package haskell-ts-mode)
 #+END_SRC
 
 * minibuffer增強
