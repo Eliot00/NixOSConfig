@@ -136,7 +136,6 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry-qt;
   };
   programs.kdeconnect.enable = true;
   programs.ssh.extraConfig = ''
