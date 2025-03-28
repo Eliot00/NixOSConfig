@@ -10,9 +10,12 @@ Declare lexical binding:
 ;; -*- lexical-binding: t -*-
 #+END_SRC
 
-GC:
+临时改变一些设置:
 #+BEGIN_SRC emacs-lisp
-(setq gc-cons-threshold (* 50 1000 1000))
+;; 禁用Magic File Name
+(defconst my-saved-file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
+(setq gc-cons-threshold most-positive-fixnum)
 #+END_SRC
 
 [[https://github.com/jwiegley/use-package][use-package]] is added automatically by the nix emacs overlay.
@@ -33,12 +36,17 @@ Similar to `add-to-list', but accepts a list as 2nd argument:
 (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
+在Mac上使用 =command= 鍵做 =meta=
+
+#+BEGIN_SRC emacs-lisp
+(setq mac-command-modifier 'meta)
+#+END_SRC
+
 * UI
 
 Change basic editor style:
 
 #+BEGIN_SRC emacs-lisp
-(tool-bar-mode -1)
 (scroll-bar-mode -1)
 (setq cursor-type 'bar)
 (setq use-dialog-box nil)               ; 鼠标操作不使用对话框
@@ -49,7 +57,7 @@ Change basic editor style:
 ** Font
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default nil :height 160 :font "FiraCode Nerd Font Mono")
+(set-face-attribute 'default nil :height 160 :font "Cascadia Code NF")
 #+END_SRC
 
 ** Theme
@@ -85,18 +93,11 @@ Change basic editor style:
 
 #+BEGIN_SRC emacs-lisp
   (use-package dashboard
-    :init
-    (setq initial-buffer-choice 'dashboard-open)
-    (setq dashboard-set-heading-icons t)
-    (setq dashboard-set-file-icons t)
-    (setq dashboard-startup-banner 'logo)
-    (setq dashboard-center-content t) ;; set to 't' for centered content
-    (setq dashboard-items '((recents . 5)
-                            (agenda . 5)
-                            (bookmarks . 3)
-                            (projects . 3)
-                            (registers . 3)))
     :custom
+    (dashboard-set-heading-icons t)
+    (dashboard-set-file-icons t)
+    (dashboard-startup-banner 'logo)
+    (dashboard-center-content t) ;; set to 't' for centered content
     (dashboard-modify-heading-icons '((recents . "file-text")
                                       (bookmarks . "book")))
     :config
@@ -109,7 +110,7 @@ Change basic editor style:
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
   :init
-  (setq nerd-icons-font-family "FiraCode Nerd Font Mono")
+  (setq nerd-icons-font-family "Cascadia Code NF")
   :custom
   (doom-modeline-irc nil)
   (doom-modeline-mu4e nil)
@@ -126,16 +127,13 @@ Change basic editor style:
 #+BEGIN_SRC emacs-lisp
 (use-package evil
   :init
-  ;; `evil-collection' assumes `evil-want-keybinding' is set to
-  ;; `nil' before loading `evil' and `evil-collection'
-  ;; @see https://github.com/emacs-evil/evil-collection#installation
-  (setq evil-want-keybinding nil)
-  (evil-mode)
+  (setq evil-want-C-u-scroll t
+        evil-want-Y-yank-to-eol t
+        evil-want-keybinding nil)
   :config
-  (setq evil-want-Y-yank-to-eol t)
-  (setq evil-want-C-u-scroll t)
   (evil-set-leader 'normal "\\")
-  :hook ((org-mode . (lambda ()
+  :hook ((after-init . evil-mode)
+         (org-mode . (lambda ()
                        (evil-define-key 'normal org-mode-map
                          (kbd "SPC") 'org-cycle
                          (kbd "<return>") 'org-open-at-point)))))
@@ -148,16 +146,6 @@ Change basic editor style:
   :after evil
   :config
   (evil-collection-init))
-#+END_SRC
-
-undo tree:
-#+BEGIN_SRC emacs-lisp
-(use-package undo-tree
-  :diminish
-  :init
-  (global-undo-tree-mode 1)
-  (setq undo-tree-auto-save-history nil)
-  (evil-set-undo-system 'undo-tree))
 #+END_SRC
 
 * 筆記&文稿
@@ -369,6 +357,7 @@ org-appear:
 
 #+BEGIN_SRC emacs-lisp
 (use-package org-roam
+  :defer t
   :custom
   (org-roam-directory
     (file-truename "~/Documents/Notes"))
@@ -386,10 +375,11 @@ org-appear:
 
 #+BEGIN_SRC emacs-lisp
 (icomplete-mode 1)
+(setq completion-cycle-threshold 4)
+(setq tab-always-indent 'complete)
 (global-auto-revert-mode t)                  ; 当另一程序修改了文件时，让 Emacs 及时刷新 Buffer
 (delete-selection-mode t)                    ; 选中文本后输入文本会替换文本（更符合我们习惯了的其它编辑器的逻辑）
 (setq make-backup-files nil)                 ; 關閉文件自動备份
-(setq auto-save-default nil)                 ; 關閉文件自動保存
 (add-hook 'prog-mode-hook #'hs-minor-mode)   ; 编程模式下，可以折叠代码块
 #+END_SRC
 
@@ -437,25 +427,11 @@ Enable flymake:
 
 ** 補全
 
-一些輔助函數：
-#+BEGIN_SRC emacs-lisp
-(defun nasy/orderless-dispatch-flex-first (_pattern index _total)
-  "orderless-flex for corfu."
-  (and (eq index 0) 'orderless-flex))
-
-(defun nasy/setup-corfu ()
-  "Setup corfu."
-  (setq-local orderless-matching-styles '(orderless-flex)
-              orderless-style-dispatchers nil)
-  (add-hook 'orderless-style-dispatchers #'nasy/orderless-dispatch-flex-first nil 'local))
-#+END_SRC
-
 *** Corfu
 
 #+BEGIN_SRC emacs-lisp
 (use-package corfu
   :hook ((prog-mode . corfu-mode)
-         (prog-mode . nasy/setup-corfu)
          (org-mode . corfu-mode)
          (corfu-mode . corfu-popupinfo-mode))
   :custom
@@ -464,12 +440,12 @@ Enable flymake:
   (corfu-quit-no-match 'separator)
   (corfu-preselect 'prompt)
   (corfu-on-exact-match nil)
-  (text-mode-ispell-word-completion nil)
-  :config
-  (setq completion-cycle-threshold 3)
-  (setq tab-always-indent 'complete)
-  (define-key corfu-map (kbd "<tab>") 'corfu-next)
-  (define-key corfu-map (kbd "S-<tab>") 'corfu-previous))
+  :bind
+  (:map corfu-map
+        ("TAB" . corfu-next)
+        ([tab] . corfu-next)
+        ("S-TAB" . corfu-previous)
+        ([backtab] . corfu-previous)))
 #+END_SRC
 
 加上 =kind-icon=
@@ -506,8 +482,13 @@ Enable flymake:
 
 讀取nix產生的環境變量，在mac上需要用nix安裝的direnv，才能在後續用envrc讀devShell：
 #+BEGIN_SRC emacs-lisp
-(when (eq system-type 'darwin)
+(defmacro when-darwin-compile (&rest body)
+  (when (eq system-type 'darwin)
+    `(progn ,@body)))
+
+(when-darwin-compile (eq system-type 'darwin)
   (use-package exec-path-from-shell
+    :ensure nil
     :config
     (setq exec-path-from-shell-shell-name "/run/current-system/sw/bin/fish")
     (exec-path-from-shell-initialize)))
@@ -525,7 +506,7 @@ Enable flymake:
 #+BEGIN_SRC emacs-lisp
 (use-package eglot
   :ensure nil
-  :commands eglot
+  :defer t
   :config
   (add-to-list 'eglot-server-programs
                '(haskell-ts-mode . ("haskell-language-server-wrapper" "--lsp")))
@@ -540,7 +521,9 @@ Enable flymake:
 #+BEGIN_SRC emacs-lisp
 (defun my/eglot-keybindings ()
   (evil-define-key 'normal eglot-mode-map (kbd "<leader>a") #'eglot-code-actions)
-  (evil-define-key 'normal eglot-mode-map (kbd "<leader>rn") #'eglot-rename))
+  (evil-define-key 'normal eglot-mode-map (kbd "<leader>rn") #'eglot-rename)
+  (evil-define-key 'normal flymake-mode-map (kbd "]d") #'flymake-goto-next-error)
+  (evil-define-key 'normal flymake-mode-map (kbd "[d") #'flymake-goto-prev-error))
 #+END_SRC
 
 ** Consult
@@ -551,6 +534,7 @@ Enable flymake:
   :config
   (evil-define-key 'normal 'global (kbd "<leader>s") #'consult-line)
   (evil-define-key 'normal 'global (kbd "<leader>f") #'consult-find)
+  (evil-define-key 'normal 'global (kbd "<leader>rc") #'consult-recent-file)
   (evil-define-key 'normal 'global (kbd "<leader>rg") #'consult-ripgrep))
 #+END_SRC
 
@@ -654,3 +638,11 @@ Enable flymake:
   (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil)))
 #+END_SRC
 
+* MISC
+
+恢復臨時設置：
+
+#+BEGIN_SRC emacs-lisp
+(setq file-name-handler-alist my-saved-file-name-handler-alist)
+(setq gc-cons-threshold 16777216) ; 16mb
+#+END_SRC

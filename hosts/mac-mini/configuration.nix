@@ -4,27 +4,18 @@
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     environment.systemPackages = with pkgs; [
-        devenv
-
         python3
-        pdm
 
         bun
         nodejs
         pm2
         pnpm
-        typescript
         typescript-language-server
         yarn
 
         rust-analyzer
 
         vim-darwin
-
-        # ios/android development
-        ruby
-        cocoapods
-        jdk
     ];
 
     users.users.elliot = {
@@ -41,19 +32,11 @@
     programs.fish = {
         enable = true;
         shellAliases = import ../../snips/alias.nix;
-        shellInit = ''
-            for p in /run/current-system/sw/bin
-              if not contains $p $fish_user_paths
-                set -g fish_user_paths $p $fish_user_paths
-              end
-            end
-        '';
     };
 
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
     system.stateVersion = 6;
-    ids.gids.nixbld = 30000;
 
     # The platform the configuration will be used on.
     nixpkgs.hostPlatform = "aarch64-darwin";
