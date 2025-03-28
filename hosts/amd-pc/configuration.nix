@@ -79,7 +79,7 @@
     isNormalUser = true;
     description = "Elliot Xu";
     extraGroups = [ "wheel" "networkmanager" "podman" ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.nushell;
+    shell = pkgs.fish;
   };
 
   fonts = {
@@ -117,9 +117,7 @@
     gnumake
     ihp-new
     nodejs
-    nushell
     ossutil
-    pandoc
     python3
     racket
     ripgrep
@@ -149,6 +147,13 @@
     enable = true;
     defaultEditor = true;
     package = pkgs.vim-full;
+  };
+  programs.fish = {
+    enable = true;
+    shellAbbrs = import ../../snips/alias.nix;
+  };
+  programs.starship = {
+    enable = true;
   };
 
   # List services that you want to enable:

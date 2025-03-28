@@ -7,7 +7,7 @@
   home.stateVersion = "24.11";
   home.packages = with pkgs; [
     tdesktop
-    spotube
+    fractal
 
     anki
     mpv # anki dependent on it
@@ -47,19 +47,16 @@
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
-  programs.nushell = {
-    enable = true;
-    shellAliases = import ../../snips/alias.nix;
-  };
-  programs.starship = {
-    enable = true;
-  };
+  programs.fish.enable = true;
   programs.kitty = {
     enable = true;
     themeFile = "everforest_light_soft";
     font = {
       name = "Cascadia Code NF";
       size = 18;
+    };
+    shellIntegration = {
+      enableFishIntegration = true;
     };
     keybindings = {
       "alt+t" = "new_tab_with_cwd";
