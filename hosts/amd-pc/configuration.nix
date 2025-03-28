@@ -114,6 +114,7 @@
     devenv
     firefox
     gcc
+    gitui
     gnumake
     ihp-new
     nodejs
