@@ -91,7 +91,7 @@
 
       jetbrains-mono
       cascadia-code
-      nerd-fonts.fira-code
+      maple-mono.NF
     ];
     fontconfig = {
       defaultFonts = {

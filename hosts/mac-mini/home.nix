@@ -39,7 +39,7 @@
   home.packages = with pkgs; [
     cascadia-code
     lxgw-wenkai
-    nerd-fonts.fira-code
+    maple-mono.NF
 
     commit-formatter
     htop
