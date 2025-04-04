@@ -52,7 +52,7 @@
     enable = true;
     themeFile = "everforest_light_soft";
     font = {
-      name = "Cascadia Code NF";
+      name = "Maple Mono NF";
       size = 18;
     };
     shellIntegration = {
