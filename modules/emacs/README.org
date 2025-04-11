@@ -51,13 +51,12 @@ Change basic editor style:
 (setq cursor-type 'bar)
 (setq use-dialog-box nil)               ; 鼠标操作不使用对话框
 (column-number-mode t)                  ; 在 Mode line 上显示列号
-(global-display-line-numbers-mode 1)    ; 在 Window 显示行号
 #+END_SRC
 
 ** Font
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default nil :height 160 :font "Cascadia Code NF")
+(set-face-attribute 'default nil :height 180 :font "Maple Mono NF")
 #+END_SRC
 
 ** Theme
