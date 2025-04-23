@@ -117,6 +117,28 @@ Change basic editor style:
   (doom-modeline-enable-word-count t))
 #+END_SRC
 
+** Indent guides
+
+#+BEGIN_SRC emacs-lisp
+(use-package indent-bars
+  :custom
+  (indent-bars-treesit-support t)
+  (indent-bars-treesit-wrap '((rust arguments parameters)))
+  (indent-bars-treesit-scope '((rust trait_item impl_item
+                                     macro_definition macro_invocation
+                                     struct_item enum_item mod_item
+                                     const_item let_declaration
+                                     function_item for_expression
+                                     if_expression loop_expression
+                                     while_expression match_expression
+                                     match_arm call_expression
+                                     token_tree token_tree_pattern
+                                     token_repetition)))
+  (indent-bars-treesit-wrap '((toml
+                               table array comment)))
+  :hook (prog-mode . indent-bars-mode))
+#+END_SRC
+
 * 快捷鍵
 
 ** Evil
