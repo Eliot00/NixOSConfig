@@ -36,12 +36,6 @@ Similar to `add-to-list', but accepts a list as 2nd argument:
 (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
-在Mac上使用 =command= 鍵做 =meta=
-
-#+BEGIN_SRC emacs-lisp
-(setq mac-command-modifier 'meta)
-#+END_SRC
-
 * UI
 
 Change basic editor style:
