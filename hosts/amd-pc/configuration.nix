@@ -115,6 +115,7 @@
     firefox
     gcc
     gnumake
+    guile
     nodejs
     python3
     racket
