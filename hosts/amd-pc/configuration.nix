@@ -115,9 +115,7 @@
     firefox
     gcc
     gnumake
-    ihp-new
     nodejs
-    ossutil
     python3
     racket
     ripgrep
