@@ -122,8 +122,6 @@
     supabase-cli
     wget
     wl-clipboard-rs
-    zip
-    unzip
   ];
 
   environment.shellAliases = import ../../snips/alias.nix;
