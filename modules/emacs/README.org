@@ -477,9 +477,9 @@ Enable flymake:
 #+BEGIN_SRC emacs-lisp
 (use-package cape
   :init
-  (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-keyword))
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-elisp-block))
 #+END_SRC
 
 
