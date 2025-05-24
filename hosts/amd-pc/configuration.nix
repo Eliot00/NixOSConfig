@@ -46,7 +46,7 @@
   #   keyMap = "us";
   # };
   i18n = {
-    defaultLocale = "C.UTF-8";
+    defaultLocale = "en_US.UTF-8";
     inputMethod = {
       enable = true;
       type = "fcitx5";
