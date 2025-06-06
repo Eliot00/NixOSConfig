@@ -13,7 +13,6 @@
     mpv # anki dependent on it
 
     vlc
-    kdePackages.kate
 
     rust-analyzer
     typescript-language-server
