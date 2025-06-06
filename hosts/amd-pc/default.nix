@@ -1,10 +1,9 @@
-{ nixpkgs, nixos-cosmic, home-manager, rust-overlay, emacs-overlay, ... }:
+{ nixpkgs, home-manager, rust-overlay, emacs-overlay, ... }:
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
     ./configuration.nix
     ../../modules/substituters
-    nixos-cosmic.nixosModules.default
 
     # Rust config
     ({ pkgs, ... }: {
