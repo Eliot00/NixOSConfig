@@ -17,7 +17,6 @@
     rust-analyzer
     typescript-language-server
 
-    yarn
     nodePackages.pnpm
 
     qbittorrent
@@ -131,5 +130,9 @@
         branch_fg: Some(Rgb(23, 146, 153))
       )
     '';
+  };
+
+  home.sessionVariables = {
+    SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt";
   };
 }
