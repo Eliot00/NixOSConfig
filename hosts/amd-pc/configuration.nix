@@ -111,7 +111,6 @@
     bun
     cachix
     commit-formatter
-    devenv
     firefox
     gcc
     gnumake
@@ -120,7 +119,6 @@
     python3
     racket
     ripgrep
-    supabase-cli
     wget
     wl-clipboard-rs
   ];
