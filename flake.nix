@@ -15,13 +15,9 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, home-manager, rust-overlay, emacs-overlay, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, rust-overlay, ... }@inputs:
   {
     nixosConfigurations.elliot-nixos = import ./hosts/amd-pc inputs;
 

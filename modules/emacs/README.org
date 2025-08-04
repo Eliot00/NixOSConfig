@@ -450,8 +450,10 @@ Enable flymake:
          (org-mode . corfu-mode)
          (corfu-mode . corfu-popupinfo-mode))
   :custom
+  (text-mode-ispell-word-completion nil)
   (corfu-cycle t)
   (corfu-auto t)
+  (corfu-separator ?\s)
   (corfu-quit-no-match 'separator)
   (corfu-preselect 'prompt)
   (corfu-on-exact-match nil)
@@ -529,6 +531,8 @@ Enable flymake:
   (eglot-autoshutdown t)
   :hook ((haskell-ts-mode . eglot-ensure)
          (rust-ts-mode . eglot-ensure)
+         (typescript-ts-mode . eglot-ensure)
+         (tsx-ts-mode . eglot-ensure)
          (prog-mode . my/eglot-keybindings)))
 #+END_SRC
 
@@ -562,9 +566,11 @@ Enable flymake:
   :custom
   (treesit-font-lock-level 4)
   (treesit-language-source-alist
-    '((rust    . ("https://github.com/tree-sitter/tree-sitter-rust"))
-      (toml    . ("https://github.com/tree-sitter/tree-sitter-toml"))
-      (haskell . ("https://github.com/tree-sitter/tree-sitter-haskell"))))
+    '((rust       . ("https://github.com/tree-sitter/tree-sitter-rust"))
+      (toml       . ("https://github.com/tree-sitter/tree-sitter-toml"))
+      (haskell    . ("https://github.com/tree-sitter/tree-sitter-haskell"))
+      (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
+      (tsx        . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))))
   :init
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode)))
 #+END_SRC
@@ -573,6 +579,14 @@ Enable flymake:
 
 #+BEGIN_SRC emacs-lisp
 (use-package haskell-ts-mode)
+#+END_SRC
+
+*** TypeScript
+
+#+BEGIN_SRC emacs-lisp
+(use-package typescript-ts-mode
+  :mode (("\\.ts\\'"  . typescript-ts-mode)
+         ("\\.tsx\\'" . tsx-ts-mode)))
 #+END_SRC
 
 * minibuffer增強

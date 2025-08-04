@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, rust-overlay, emacs-overlay, ... }:
+{ nixpkgs, home-manager, rust-overlay, ... }:
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
@@ -9,7 +9,6 @@ nixpkgs.lib.nixosSystem {
     ({ pkgs, ... }: {
       nixpkgs.overlays = [
         rust-overlay.overlays.default
-        emacs-overlay.overlay
       ];
       environment.systemPackages = [
         (pkgs.rust-bin.stable.latest.default.override {
