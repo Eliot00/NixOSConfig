@@ -8,7 +8,6 @@
 
         bun
         nodejs
-        pm2
         pnpm
         typescript-language-server
         yarn
