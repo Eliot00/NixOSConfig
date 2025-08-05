@@ -38,7 +38,7 @@
   # environment.
   home.packages = with pkgs; [
     cascadia-code
-    lxgw-wenkai
+    lxgw-wenkai-tc
     maple-mono.NF
 
     commit-formatter
