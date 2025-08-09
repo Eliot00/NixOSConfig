@@ -22,8 +22,7 @@
     nixosConfigurations.elliot-nixos = import ./hosts/amd-pc inputs;
 
     darwinConfigurations."ElliotdeMac-mini" = import ./hosts/mac-mini inputs;
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."ElliotdeMac-mini".pkgs;
+    darwinConfigurations."ElliotnoMacBook-Pro" = import ./hosts/mac-book inputs;
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
   };
