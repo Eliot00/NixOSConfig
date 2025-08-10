@@ -55,6 +55,9 @@ let
     nixpkgs.hostPlatform = "x86_64-darwin";
   };
 in nix-darwin.lib.darwinSystem {
-  modules = [ configuration ];
+  modules = [
+    configuration
+    ../../modules/substituters
+  ];
 }
 
