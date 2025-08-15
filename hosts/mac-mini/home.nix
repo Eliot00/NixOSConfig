@@ -16,7 +16,6 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   programs.gpg.enable = true;
-  programs.wezterm.enable = true;
 
   programs.git = {
     enable = true;
