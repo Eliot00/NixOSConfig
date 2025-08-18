@@ -4,24 +4,20 @@ let
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     environment.systemPackages = with pkgs; [
-      vim-darwin
-      python3Full
+      bun
+      commit-formatter
+      htop
       nodejs
       pnpm
-      typescript-language-server
-      bun
+      python3Full
+      ripgrep
       starship
+      typescript-language-server
+      vim-darwin
     ];
 
     environment.variables = {
       EDITOR = "vim";
-    };
-
-    homebrew = {
-      enable = true;
-      casks = [
-        "wezterm@nightly"
-      ];
     };
 
     fonts.packages = [
