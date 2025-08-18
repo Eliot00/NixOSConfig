@@ -10,6 +10,7 @@ let
       pnpm
       typescript-language-server
       bun
+      starship
     ];
 
     environment.variables = {
@@ -39,7 +40,7 @@ let
     # Enable alternative shell support in nix-darwin.
     programs.fish = {
       enable = true;
-      shellAliases = import ../../snips/alias.nix;
+      shellAbbrs = import ../../snips/alias.nix;
     };
 
     system.primaryUser = "elliot";

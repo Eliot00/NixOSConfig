@@ -30,7 +30,7 @@
 
     programs.fish = {
         enable = true;
-        shellAliases = import ../../snips/alias.nix;
+        shellAbbrs = import ../../snips/alias.nix;
     };
 
     # Used for backwards compatibility, please read the changelog before changing.
