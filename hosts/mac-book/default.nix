@@ -20,6 +20,14 @@ let
       EDITOR = "vim";
     };
 
+    homebrew = {
+      enable = true;
+      casks = [
+        "jimeh/emacs-builds/emacs-app"
+      ];
+    };
+
+
     fonts.packages = [
       pkgs.maple-mono.NF
       pkgs.lxgw-wenkai-tc
