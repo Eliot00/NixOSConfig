@@ -15,6 +15,7 @@
         rust-analyzer
 
         vim-darwin
+        rsync
     ];
 
     users.users.elliot = {
