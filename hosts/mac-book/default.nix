@@ -9,7 +9,7 @@ let
       htop
       nodejs
       pnpm
-      python3Full
+      python3
       ripgrep
       starship
       typescript-language-server
@@ -29,7 +29,7 @@ let
 
 
     fonts.packages = [
-      pkgs.maple-mono.NF
+      pkgs.maple-mono.NF-CN
       pkgs.lxgw-wenkai-tc
     ];
 

@@ -38,7 +38,7 @@
   home.packages = with pkgs; [
     cascadia-code
     lxgw-wenkai-tc
-    maple-mono.NF
+    maple-mono.NF-CN
 
     commit-formatter
     htop
