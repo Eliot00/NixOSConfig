@@ -18,6 +18,13 @@
         rsync
     ];
 
+    fonts.packages = [
+      pkgs.cascadia-code
+      pkgs.maple-mono.NF
+      pkgs.lxgw-wenkai-tc
+      pkgs.nerd-fonts.iosevka
+    ];
+
     users.users.elliot = {
         home = "/Users/elliot";
     };

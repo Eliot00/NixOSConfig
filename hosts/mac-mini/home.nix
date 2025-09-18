@@ -36,10 +36,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    cascadia-code
-    lxgw-wenkai-tc
-    maple-mono.NF-CN
-
     commit-formatter
     htop
     ripgrep

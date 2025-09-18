@@ -27,10 +27,10 @@ let
       ];
     };
 
-
     fonts.packages = [
-      pkgs.maple-mono.NF-CN
+      pkgs.maple-mono.NF
       pkgs.lxgw-wenkai-tc
+      pkgs.nerd-fonts.iosevka
     ];
 
     # Necessary for using flakes on this system.
