@@ -33,7 +33,7 @@
     nix.settings = {
         experimental-features = "nix-command flakes";
         sandbox = true;
-        trusted-users = [ "root" "elliot" ];
+        extra-trusted-users = [ "elliot" ];
     };
 
     programs.fish = {
