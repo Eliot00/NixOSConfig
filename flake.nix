@@ -20,6 +20,7 @@
   outputs = { self, nixpkgs, home-manager, rust-overlay, ... }@inputs:
   {
     nixosConfigurations.elliot-nixos = import ./hosts/amd-pc inputs;
+    nixosConfigurations.raspberry = import ./hosts/raspberry inputs;
 
     darwinConfigurations."ElliotdeMac-mini" = import ./hosts/mac-mini inputs;
     darwinConfigurations."ElliotnoMacBook-Pro" = import ./hosts/mac-book inputs;
