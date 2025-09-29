@@ -34,11 +34,30 @@ let
     ];
 
     # Necessary for using flakes on this system.
-    nix.settings = {
-      experimental-features = "nix-command flakes";
-      trusted-users = [
-        "elliot"
-      ];
+    nix = {
+      linux-builder = {
+        enable = true;
+        systems = ["x86_64-linux" "aarch64-linux"];
+        package = pkgs.darwin.linux-builder-x86_64;
+        ephemeral = true;
+        maxJobs = 4;
+        config = {
+          virtualisation = {
+            cores = 4;
+            darwin-builder = {
+              diskSize = 30 * 1024;
+              memorySize = 6 * 1024;
+            };
+          };
+          # boot.binfmt.emulatedSystems = ["aarch64-linux"];
+        };
+      };
+      settings = {
+        experimental-features = "nix-command flakes";
+        trusted-users = [
+          "elliot"
+        ];
+      };
     };
 
     # Enable alternative shell support in nix-darwin.
