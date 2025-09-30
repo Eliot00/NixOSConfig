@@ -14,6 +14,8 @@ let
       starship
       typescript-language-server
       vim-darwin
+      rsync
+      gitui
     ];
 
     environment.variables = {
