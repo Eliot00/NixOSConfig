@@ -25,11 +25,10 @@
       co = "checkout";
       lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %C(bold blue)%s%Creset %Cgreen(%cr) <%an>%Creset' --abbrev-commit --date=relative";
     };
-    extraConfig = {
-      # Sign all commits using ssh key
-      commit.gpgsign = true;
-      gpg.format = "ssh";
-      user.signingkey = "~/.ssh/id_ed25519.pub";
+    signing = {
+      format = "ssh";
+      key = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
+      signByDefault = true;
     };
   };
 
