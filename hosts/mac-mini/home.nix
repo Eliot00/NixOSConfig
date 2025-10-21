@@ -39,7 +39,6 @@
     htop
     ripgrep
     tree
-    guile
   ];
 
   programs.fish.enable = true;

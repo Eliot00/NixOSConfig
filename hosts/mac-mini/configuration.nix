@@ -4,18 +4,15 @@
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     environment.systemPackages = with pkgs; [
-        python3
-
         bun
+        guile
         nodejs
         pnpm
-        typescript-language-server
-        yarn
-
-        rust-analyzer
-
-        vim-darwin
+        python3
         rsync
+        rust-analyzer
+        typescript-language-server
+        vim-darwin
     ];
 
     fonts.packages = [
