@@ -26,7 +26,6 @@
       user = {
         name = "Elliot";
         email = "hack00mind@gmail.com";
-        signingkey = "/Users/elliot/.ssh/id_ed25519.pub";
       };
       alias = {
         lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %C(bold blue)%s%Creset %Cgreen(%cr) <%an>%Creset' --abbrev-commit --date=relative";
@@ -34,6 +33,8 @@
     };
     signing = {
       format = "ssh";
+      key = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
+      signByDefault = true;
     };
   };
 
