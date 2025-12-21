@@ -23,6 +23,7 @@
     nixosConfigurations.raspberry = import ./hosts/raspberry inputs;
 
     darwinConfigurations."ElliotdeMac-mini" = import ./hosts/mac-mini inputs;
+    darwinConfigurations."Sariputra" = import ./hosts/sariputra inputs;
     darwinConfigurations."ElliotnoMacBook-Pro" = import ./hosts/mac-book inputs;
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
