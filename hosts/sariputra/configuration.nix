@@ -6,6 +6,8 @@
     environment.systemPackages = with pkgs; [
         bun
         guile
+        nodejs
+        pnpm
         python3
         rsync
         rust-analyzer
