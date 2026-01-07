@@ -18,6 +18,7 @@ in nix-darwin.lib.darwinSystem {
       environment.systemPackages = [
         (pkgs.rust-bin.stable.latest.default.override {
           extensions = [ "rust-src" ];
+          targets = [ "aarch64-linux-android" ];
         })
       ];
     })
