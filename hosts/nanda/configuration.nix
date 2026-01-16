@@ -6,6 +6,7 @@
     environment.systemPackages = with pkgs; [
         bun
         cargo-cross
+        devenv
         guile
         nodejs
         pnpm
@@ -13,6 +14,7 @@
         rsync
         rust-analyzer
         typescript-language-server
+        uv
         (vim-darwin.overrideAttrs (oldAttrs: rec {
           version = "9.1.1999";
           src = fetchFromGitHub {

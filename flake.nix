@@ -22,7 +22,7 @@
     nixosConfigurations.elliot-nixos = import ./hosts/amd-pc inputs;
     nixosConfigurations.raspberry = import ./hosts/raspberry inputs;
 
-    darwinConfigurations."ElliotdeMac-mini" = import ./hosts/mac-mini inputs;
+    darwinConfigurations."Nanda" = import ./hosts/nanda inputs;
     darwinConfigurations."Sariputra" = import ./hosts/sariputra inputs;
     darwinConfigurations."ElliotnoMacBook-Pro" = import ./hosts/mac-book inputs;
 
