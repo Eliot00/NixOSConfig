@@ -20,11 +20,8 @@
   outputs = { self, nixpkgs, home-manager, rust-overlay, ... }@inputs:
   {
     nixosConfigurations.elliot-nixos = import ./hosts/amd-pc inputs;
-    nixosConfigurations.raspberry = import ./hosts/raspberry inputs;
-
     darwinConfigurations."Nanda" = import ./hosts/nanda inputs;
     darwinConfigurations."Sariputra" = import ./hosts/sariputra inputs;
-    darwinConfigurations."ElliotnoMacBook-Pro" = import ./hosts/mac-book inputs;
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
   };
