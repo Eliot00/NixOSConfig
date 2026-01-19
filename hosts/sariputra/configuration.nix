@@ -6,6 +6,7 @@
     environment.systemPackages = with pkgs; [
         bun
         cmake
+        devenv
         guile
         nodejs
         pnpm
