@@ -7,6 +7,7 @@
         bun
         cmake
         devenv
+        git-cliff
         guile
         nodejs
         pnpm
