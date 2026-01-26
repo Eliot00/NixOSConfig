@@ -15,15 +15,7 @@
         rust-analyzer
         typescript-language-server
         uv
-        (vim-darwin.overrideAttrs (oldAttrs: rec {
-          version = "9.1.1999";
-          src = fetchFromGitHub {
-            owner = "vim";
-            repo = "vim";
-            rev = "v${version}";
-            hash = "sha256-yRqdOmyX/wK+1IIrGiJWA953mlL9JJx69ODmM6BTyAY=";
-          };
-        }))
+        vim-darwin
     ];
 
     fonts.packages = [
